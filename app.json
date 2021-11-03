@@ -1,0 +1,22 @@
+{
+  "name": "Video evaluation slider on Django with Heroku",
+  "description": "This application serves a web page to evaluate videos.",
+  "image": "heroku/python",
+  "repository": "https://github.com/Parkinson-Disease-Detection-CSIC/video-evaluation-slider.git",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "The secret key for the Django application.",
+      "generator": "secret"
+    }
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python manage.py collectstatic --noinput",
+        "test": "python manage.py test"
+      }
+    }
+  }
+}
