@@ -1,0 +1,7 @@
+<form action="{% url 'polls:evaluate' sub_num %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>"Hello world !!"</h1></legend>
+</fieldset>
+<input type="submit" value="Evaluate">
+</form>

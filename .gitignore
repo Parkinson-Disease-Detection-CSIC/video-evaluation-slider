@@ -3,3 +3,4 @@ server.*
 *.pem
 venv
 start_database.sh
+postgres
