@@ -1,2 +1,5 @@
 __pycache__
+server.*
+*.pem
 venv
+start_database.sh
