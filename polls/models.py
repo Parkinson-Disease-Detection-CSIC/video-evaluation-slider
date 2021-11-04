@@ -4,6 +4,7 @@ class Evaluation(models.Model):
     evaluator = models.CharField(max_length=40)
     date = models.DateTimeField('evaluation date')
     subject = models.IntegerField()
+    exercise = models.CharField(max_length=40)
     tremor = models.FloatField()
     bradykinesia = models.FloatField()
     stability = models.FloatField()
