@@ -1,3 +1,8 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+
 <form action="{% url 'polls:evaluate' sub_num %}" method="post">
 {% csrf_token %}
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -15,19 +20,20 @@ body, html {
 }
 
 .leftpane {
-    width: 19%;
+    width: 30%;
     height: 80%;
     float: left;
     background-color: rosybrown;
 }
 
 .rightpane {
-  width: 79%;
+  width: 50%;
   height: 80%;
   position: relative;
   float: right;
   background-color: blue;
   border-collapse: collapse;
+  padding: 20px;
 }
 
 .toppane {
@@ -36,6 +42,7 @@ body, html {
   border-collapse: collapse;
   background-color: #4da6ff;
 }
+
     * {
         font-family: "Rubik", "sans-serif";
         font-size: 24pt;
@@ -46,10 +53,15 @@ body, html {
         margin-top: 50px;
     }
 
+
     h1 {
         color: green;
         font-size: 42pt;
         text-align: center;
+    }
+
+    input[type="range"] {
+        width:400px;
     }
 
 </style>
@@ -57,7 +69,7 @@ body, html {
 <div class="toppane" style="padding: 10px">
     <h1>Updating information for subject {{ sub_num }}.</h1><br>
 </div>
-<div class="leftpane" style="padding-right: 20px">
+<div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
 <div>
     <label for="rangeTremor">Tremor</label>
     <input type="range" name="rangTremor" min="0" max="100">
@@ -92,10 +104,8 @@ body, html {
 </div>
 </div>
 <div class="rightpane">
-<div>
-   <video width="1280" height="720" controls>
-     <source src="https://rr2---sn-h5qzen76.c.drive.google.com/videoplayback?expire=1636044192&ei=YNWDYantOaqAu7APj5WDwAI&ip=94.73.33.166&cp=QVRIWEFfU1FXQ1hPOnFNQ2R6eXlteVpQTEtZeVJmUnJQaVpSTExXSVMzMzV3R1hoUUVfNF93TWM&id=362fc52cb24f6f47&itag=18&source=webdrive&requiressl=yes&mh=MY&mm=32&mn=sn-h5qzen76&ms=su&mv=m&mvi=2&pl=19&sc=yes&ttl=transient&susc=dr&driveid=1-Cs7LiuaENKTA7CiOwjPFj4wHkBTF18U&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=63.506&lmt=1614310752784790&mt=1636029378&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRQIgCW1ykdsfUVQCUFpzkTXfa4gtJoW8P3OvbSeedOxLstcCIQCsNLokD2oYuLCMwu8HdCC741p7y5zQ46AMFh3b4GKJOg==&lsparams=mh,mm,mn,ms,mv,mvi,pl,sc&lsig=AG3C_xAwRQIhAKFbzIKNODp3GVuRx2--rTeFpwoqKDl77ksqUv8BQ8vgAiACP4tKGwC-8Lm-AAcDy45s9QGYokcYVM-CTMrzq6D_RQ==&cpn=XUMmTz7YuafRUClZ&c=WEB_EMBEDDED_PLAYER&cver=1.20211031.00.00" type='video/mp4'>
-   </video>
+<div style="text-align:center">
+   <iframe src="https://drive.google.com/file/d/1-Cs7LiuaENKTA7CiOwjPFj4wHkBTF18U/preview" width="640" height="480" allow="autoplay"></iframe>
 </div>
 <div style="text-align:center">
     <button style="background-color:red; border-color:yellow; color:white" name="Send">Update and Next</button>
@@ -103,3 +113,5 @@ body, html {
 </div>
 </div>
 </form>
+
+{% endblock %}
