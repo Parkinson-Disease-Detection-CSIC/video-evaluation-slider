@@ -48,11 +48,52 @@ body, html {
         font-size: 24pt;
     }
 
+    .rate {
+    }
+    .rate:not(:checked) > input {
+	position: relative;
+        top:-9999px; 
+    }
+    .rate:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:30px;
+        color:#ccc;
+    }
+    .rate:not(:checked) > label:before {
+        content: '★ ';
+    }
+    .rate > input:checked ~ label {
+       color: #ffc700;
+    }
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+         color: #deb217;
+    }
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+    }
+
+    .vertical-center {
+        text-align: right;
+        margin: 0;
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+    }
+
     div {
         text-align: right;
         margin-top: 50px;
     }
-
 
     h1 {
         color: green;
@@ -72,37 +113,149 @@ body, html {
 <div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
 {% if type == "symptoms"  %}
 <div>
-    <label for="rangeTremor">Tremor</label>
-    <input type="range" name="rangTremor" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5tremor" name="rateTremor" value="5" />
+        <label for="star5tremor" title="text">5 stars</label>
+        <input type="radio" id="star4tremor" name="rateTremor" value="4" />
+        <label for="star4tremor" title="text">4 stars</label>
+        <input type="radio" id="star3tremor" name="rateTremor" value="3" />
+        <label for="star3tremor" title="text">3 stars</label>
+        <input type="radio" id="star2tremor" name="rateTremor" value="2" />
+        <label for="star2tremor" title="text">2 stars</label>
+        <input type="radio" id="star1tremor" name="rateTremor" value="1" />
+        <label for="star1tremor" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeTremor">Tremor</label>
+        <input type="range" name="rangTremor" min="0" max="100">
+    </div>
 </div>
 <div>
-    <label for="rangeBradykinesia">Bradykinesia</label>
-    <input type="range" name="rangBradykinesia" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5bradykinesia" name="rateBradykinesia" value="5" />
+        <label for="star5bradykinesia" title="text">5 stars</label>
+        <input type="radio" id="star4bradykinesia" name="rateBradykinesia" value="4" />
+        <label for="star4bradykinesia" title="text">4 stars</label>
+        <input type="radio" id="star3bradykinesia" name="rateBradykinesia" value="3" />
+        <label for="star3bradykinesia" title="text">3 stars</label>
+        <input type="radio" id="star2bradykinesia" name="rateBradykinesia" value="2" />
+        <label for="star2bradykinesia" title="text">2 stars</label>
+        <input type="radio" id="star1bradykinesia" name="rateBradykinesia" value="1" />
+        <label for="star1bradykinesia" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeBradykinesia">Bradykinesia</label>
+        <input type="range" name="rangBradykinesia" min="0" max="100">
+    </div>
 </div>
 <div>
-    <label for="rangeStability">Stability</label>
-    <input type="range" name="rangStability" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5stability" name="rateStability" value="5" />
+        <label for="star5stability" title="text">5 stars</label>
+        <input type="radio" id="star4stability" name="rateStability" value="4" />
+        <label for="star4stability" title="text">4 stars</label>
+        <input type="radio" id="star3stability" name="rateStability" value="3" />
+        <label for="star3stability" title="text">3 stars</label>
+        <input type="radio" id="star2stability" name="rateStability" value="2" />
+        <label for="star2stability" title="text">2 stars</label>
+        <input type="radio" id="star1stability" name="rateStability" value="1" />
+        <label for="star1stability" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeStability">Stability</label>
+        <input type="range" name="rangStability" min="0" max="100">
+    </div>
 </div>
 <div>
-    <label for="rangeDynStability">Dynamic Stability</label>
-    <input type="range" name="rangDynStability" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5dynstability" name="rateDynStability" value="5" />
+        <label for="star5dynstability" title="text">5 stars</label>
+        <input type="radio" id="star4dynstability" name="rateDynStability" value="4" />
+        <label for="star4dynstability" title="text">4 stars</label>
+        <input type="radio" id="star3dynstability" name="rateDynStability" value="3" />
+        <label for="star3dynstability" title="text">3 stars</label>
+        <input type="radio" id="star2dynstability" name="rateDynStability" value="2" />
+        <label for="star2dynstability" title="text">2 stars</label>
+        <input type="radio" id="star1dynstability" name="rateDynStability" value="1" />
+        <label for="star1dynstability" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeDynStability">Dynamic Stability</label>
+        <input type="range" name="rangDynStability" min="0" max="100">
+    </div>
 </div>
 <div>
-    <label for="rangeFreezing">Freezing</label>
-    <input type="range" name="rangFreezing" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5freezing" name="rateFreezing" value="5" />
+        <label for="star5freezing" title="text">5 stars</label>
+        <input type="radio" id="star4freezing" name="rateFreezing" value="4" />
+        <label for="star4freezing" title="text">4 stars</label>
+        <input type="radio" id="star3freezing" name="rateFreezing" value="3" />
+        <label for="star3freezing" title="text">3 stars</label>
+        <input type="radio" id="star2freezing" name="rateFreezing" value="2" />
+        <label for="star2freezing" title="text">2 stars</label>
+        <input type="radio" id="star1freezing" name="rateFreezing" value="1" />
+        <label for="star1freezing" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeFreezing">Freezing</label>
+        <input type="range" name="rangFreezing" min="0" max="100">
+    </div>
 </div>
 <div>
-    <label for="rangeSmoothness">Smoothness</label>
-    <input type="range" name="rangSmoothness" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5smoothness" name="rateSmoothness" value="5" />
+        <label for="star5smoothness" title="text">5 stars</label>
+        <input type="radio" id="star4smoothness" name="rateSmoothness" value="4" />
+        <label for="star4smoothness" title="text">4 stars</label>
+        <input type="radio" id="star3smoothness" name="rateSmoothness" value="3" />
+        <label for="star3smoothness" title="text">3 stars</label>
+        <input type="radio" id="star2smoothness" name="rateSmoothness" value="2" />
+        <label for="star2smoothness" title="text">2 stars</label>
+        <input type="radio" id="star1smoothness" name="rateSmoothness" value="1" />
+        <label for="star1smoothness" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeSmoothness">Smoothness</label>
+        <input type="range" name="rangSmoothness" min="0" max="100">
+    </div>
 </div>
 <div>
-    <label for="rangeSymmetry">Symmetry</label>
-    <input type="range" name="rangSymmetry" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5symmetry" name="rateSymmetry" value="5" />
+        <label for="star5symmetry" title="text">5 stars</label>
+        <input type="radio" id="star4symmetry" name="rateSymmetry" value="4" />
+        <label for="star4symmetry" title="text">4 stars</label>
+        <input type="radio" id="star3symmetry" name="rateSymmetry" value="3" />
+        <label for="star3symmetry" title="text">3 stars</label>
+        <input type="radio" id="star2symmetry" name="rateSymmetry" value="2" />
+        <label for="star2symmetry" title="text">2 stars</label>
+        <input type="radio" id="star1symmetry" name="rateSymmetry" value="1" />
+        <label for="star1symmetry" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeSymmetry">Symmetry</label>
+        <input type="range" name="rangSymmetry" min="0" max="100">
+    </div>
 </div>
 {% else %}
 <div>
-    <label for="rangeGeneral">GENERAL</label>
-    <input type="range" name="rangGeneral" min="0" max="100">
+    <div class="rate">
+        <input type="radio" id="star5general" name="rateGeneral" value="5" />
+        <label for="star5general" title="text">5 stars</label>
+        <input type="radio" id="star4general" name="rateGeneral" value="4" />
+        <label for="star4general" title="text">4 stars</label>
+        <input type="radio" id="star3general" name="rateGeneral" value="3" />
+        <label for="star3general" title="text">3 stars</label>
+        <input type="radio" id="star2general" name="rateGeneral" value="2" />
+        <label for="star2general" title="text">2 stars</label>
+        <input type="radio" id="star1general" name="rateGeneral" value="1" />
+        <label for="star1general" title="text">1 star</label>
+    </div>
+    <div class="vertical-center">
+        <label for="rangeGeneral">GENERAL</label>
+        <input type="range" name="rangGeneral" min="0" max="100">
+    </div>
 </div>
 {% endif %}
 </div>
