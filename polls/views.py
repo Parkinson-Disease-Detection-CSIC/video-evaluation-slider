@@ -12,7 +12,14 @@ def results(request):
     return HttpResponse("You're looking at all subjects.")
 
 @login_required
-def detail(request, sub_num):
+def general(request, sub_num):
+    return detail(request, sub_num, 'general')
+
+@login_required
+def symptoms(request, sub_num):
+    return detail(request, sub_num, 'symptoms')
+
+def detail(request, sub_num, type):
     user = authenticate()
     try:
         evaluation = Evaluation.objects.get(pk=sub_num)
@@ -21,6 +28,7 @@ def detail(request, sub_num):
     parameters = {
         'evaluation': evaluation,
 	'sub_num': sub_num,
+	'type': type
     }
     return render(request, 'polls/detail.html', parameters)
 
