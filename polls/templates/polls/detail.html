@@ -264,10 +264,10 @@ body, html {
 </div>
 <div style="text-align:center">
     <div>
-        <button style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="previousVideo()" id="leftButton" name="Previous">Previous Video</button>
+        <button type="button" style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="previousVideo()" id="leftButton" name="Previous">Previous Video</button>
     </div>
     <div>
-        <button style="background-color:red; border-color:yellow; color:white" onclick="nextVideo()" id="middleButton" name="Next">Next Video</button>
+        <button type="button" style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="nextVideo()" id="middleButton" name="Next">Next Video</button>
     </div>
     <div>
         <button style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="saveAndNext()" id="rightButton" name="SaveAndNext">Save and Next</button>
@@ -276,15 +276,34 @@ body, html {
 </div>
 </div>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.videosCount = {{ videos|length }};
+	document.videoArray = {{ videos|safe }};
+        document.currentVideo=0;
+        if (document.videosCount == 1) {
+            document.getElementById("rightButton").style.visibility = "visible";
+	} else {
+            document.getElementById("middleButton").style.visibility = "visible";
+	}
+    }, false);
     function nextVideo() {
-        videosCount = {{ videos|length }};
-        if (videosCount > 1) {
+        if (document.videosCount > document.currentVideo+1) {
             document.getElementById("leftButton").style.visibility = "visible";
-            document.currentVideo=1;
-       }
-       if (document.currentVideo == videosCount - 1) {
-           document.getElementById("middleButton").style.visibility = "visible";
-       }
+            document.currentVideo=document.currentVideo+1;
+        }
+        if (document.currentVideo == document.videosCount - 1) {
+            document.getElementById("middleButton").style.visibility = "hidden";
+            document.getElementById("rightButton").style.visibility = "visible";
+        }
+    }
+    function previousVideo() {
+        if (document.currentVideo > 0) {
+            document.currentVideo=document.currentVideo-1;
+            document.getElementById("middleButton").style.visibility = "visible";
+	    if (document.currentVideo == 0) {
+	        document.getElementById("leftButton").style.visibility = "hidden";
+	    }
+	}
     }
 </script>
 {% endblock %}
