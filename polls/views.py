@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import Evaluation
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from .videos import video_urls
 
 def index(request):
     return HttpResponse("This is a video evaluator app for Parkinson's symptoms.")
@@ -13,11 +14,11 @@ def results(request):
 
 @login_required
 def general(request, sub_num):
-    return detail(request, sub_num, 'general')
+    return detail(request, 66, 'general')
 
 @login_required
 def symptoms(request, sub_num):
-    return detail(request, sub_num, 'symptoms')
+    return detail(request, 68, 'symptoms')
 
 def detail(request, sub_num, type):
     user = authenticate()
@@ -28,6 +29,7 @@ def detail(request, sub_num, type):
     parameters = {
         'evaluation': evaluation,
 	'sub_num': sub_num,
+	'videos': video_urls[sub_num],
 	'type': type
     }
     return render(request, 'polls/detail.html', parameters)
