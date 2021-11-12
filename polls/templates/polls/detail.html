@@ -260,7 +260,7 @@ body, html {
 </div>
 <div class="rightpane">
 <div style="text-align:center">
-   <iframe src={{ videos.0 }} width="640" height="480" allow="autoplay"></iframe>
+   <iframe id="videoframe" src={{ videos.0 }} width="640" height="480" allow="autoplay"></iframe>
 </div>
 <div style="text-align:center">
     <div>
@@ -290,6 +290,9 @@ body, html {
         if (document.videosCount > document.currentVideo+1) {
             document.getElementById("leftButton").style.visibility = "visible";
             document.currentVideo=document.currentVideo+1;
+	    idx = document.currentVideo;
+            document.getElementById("videoframe").src = document.videoArray[idx];
+
         }
         if (document.currentVideo == document.videosCount - 1) {
             document.getElementById("middleButton").style.visibility = "hidden";
@@ -299,6 +302,8 @@ body, html {
     function previousVideo() {
         if (document.currentVideo > 0) {
             document.currentVideo=document.currentVideo-1;
+	    idx = document.currentVideo;
+            document.getElementById("videoframe").src = document.videoArray[idx];
             document.getElementById("middleButton").style.visibility = "visible";
 	    if (document.currentVideo == 0) {
 	        document.getElementById("leftButton").style.visibility = "hidden";
