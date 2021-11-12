@@ -29,7 +29,7 @@ def detail(request, sub_num, type):
     parameters = {
         'evaluation': evaluation,
 	'sub_num': sub_num,
-	'videos': video_urls[sub_num],
+	'videos': list(video_urls[sub_num].values()),
 	'type': type
     }
     return render(request, 'polls/detail.html', parameters)

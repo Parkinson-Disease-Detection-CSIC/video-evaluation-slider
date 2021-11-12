@@ -3,7 +3,6 @@
 
 {% block content %}
 
-<form action="{% url 'polls:evaluate' sub_num %}" method="post">
 {% csrf_token %}
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
@@ -261,13 +260,31 @@ body, html {
 </div>
 <div class="rightpane">
 <div style="text-align:center">
-   <iframe src={{ videos.upngo }} width="640" height="480" allow="autoplay"></iframe>
+   <iframe src={{ videos.0 }} width="640" height="480" allow="autoplay"></iframe>
 </div>
 <div style="text-align:center">
-    <button style="background-color:red; border-color:yellow; color:white" name="Send">Update and Next</button>
+    <div>
+        <button style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="previousVideo()" id="leftButton" name="Previous">Previous Video</button>
+    </div>
+    <div>
+        <button style="background-color:red; border-color:yellow; color:white" onclick="nextVideo()" id="middleButton" name="Next">Next Video</button>
+    </div>
+    <div>
+        <button style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="saveAndNext()" id="rightButton" name="SaveAndNext">Save and Next</button>
+    </div>
 </div>
 </div>
 </div>
-</form>
-
+<script>
+    function nextVideo() {
+        videosCount = {{ videos|length }};
+        if (videosCount > 1) {
+            document.getElementById("leftButton").style.visibility = "visible";
+            document.currentVideo=1;
+       }
+       if (document.currentVideo == videosCount - 1) {
+           document.getElementById("middleButton").style.visibility = "visible";
+       }
+    }
+</script>
 {% endblock %}
