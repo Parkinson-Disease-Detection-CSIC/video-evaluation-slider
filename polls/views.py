@@ -11,6 +11,9 @@ import random
 def index(request):
     return redirect('/polls/68/general/details')
 
+def handler404(request):
+    return redirect('/polls/68/general/details')
+
 @login_required
 def details(request, sub_num, input_type):
     user = authenticate()
