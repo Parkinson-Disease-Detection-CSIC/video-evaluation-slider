@@ -37,7 +37,7 @@ body, html {
 
 .toppane {
   width: 100%;
-  height: 100px;
+  height: 400px;
   border-collapse: collapse;
   background-color: #4da6ff;
 }
@@ -45,12 +45,58 @@ body, html {
     * {
         font-family: "Rubik", "sans-serif";
         font-size: 24pt;
+	margin: 0;
+	padding: 0;
+    }
+
+    .first_column {
+        padding: 0;
+	margin: 0;
+        float: left;
+	width: 65%;
+    }
+
+    .second_column {
+        padding: 0;
+	margin: 0;
+        float: right;
+	width: 35%;
+    }
+
+    .first_row:after {
+        padding: 0;
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .limit_row:after {
+        padding: 20px;
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .row:after {
+        padding: 0;
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .col_3 {
+        float: left;
+	width: 33%;
     }
 
     .rate {
+        padding: 0;
+	margin: 0;
+        position: relative;
+        float: left;
     }
     .rate:not(:checked) > input {
-    position: relative;
+        position: relative;
         top:-9999px; 
     }
     .rate:not(:checked) > label {
@@ -83,10 +129,10 @@ body, html {
     .vertical-center {
         text-align: right;
         margin: 0;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+        position: relative;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
     }
 
     div {
@@ -105,157 +151,194 @@ body, html {
     }
 
 </style>
-<form name="evaluation" action="{% url 'polls:evaluate' sub_num %}" method="post">
+<form name="evaluation" action="{% url 'polls:evaluate' sub_num type %}" method="post">
 {% csrf_token %}
 <div class="container">
 <div class="toppane" style="padding: 10px">
     <h1>Updating {{ type }} information for subject {{ sub_num }}.</h1><br>
+{% if type == "symptoms"  %}
+    <p style="text-align:left; padding:0;">
+    Thank you for evaluating the symptoms of this subject!
+    </p>
+    <ul type="circle" style="text-align:left; padding:20px; margin:20px;">
+    <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required). Videos may be enlarged in a different window by clicking on the icon on the top right corner.</li>
+    <li>Please move the slider of each of the symptoms evaluating the severity of each of them (to the left for subjects presenting weaker symptoms, that is subjects in a better condition, and to the right for subjects with stronger symptoms, that is subjects in a worse condition).</li>
+    <li>Please rate your confidence in evaluating each of the symptoms with the 5 stars next to each slider.</li>
+    <li>And finally, please click on "Save and Next" button to save your evaluation and go to the next subject.</li>
+    </ul>
+{% else %}
+    <p style="text-align:left; padding:10px;">
+    Thank you for evaluating the general condition of this subject!
+    </p>
+    <ul type="circle" style="text-align:left; padding:20px; margin:20px;">
+    <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required). Videos may be enlarged in a different window by clicking on the icon on the top right corner.</li>
+    <li>Please move the slider to evaluate the severity of Parkinson for this subject (to the left for subjects in a better condition, and to the right for subjects in a worse condition).</li>
+    <li>Please rate your confidence in evaluating this subject with the 5 stars the slider.</li>
+    <li>And finally, please click on "Save and Next" button to save your evaluation and go to the next subject.</li>
+    </ul>
+{% endif %}
 </div>
 <div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
 {% if type == "symptoms"  %}
-<div>
-    <div class="rate">
-        <input type="radio" id="star5tremor" name="rateTremor" value="5" onclick="tremorRateClicked()"/>
-        <label for="star5tremor" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4tremor" name="rateTremor" value="4" onclick="tremorRateClicked()"/>
-        <label for="star4tremor" title="high confidence">4 stars</label>
-        <input type="radio" id="star3tremor" name="rateTremor" value="3" onclick="tremorRateClicked()"/>
-        <label for="star3tremor" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2tremor" name="rateTremor" value="2" onclick="tremorRateClicked()"/>
-        <label for="star2tremor" title="low confidence">2 stars</label>
-        <input type="radio" id="star1tremor" name="rateTremor" value="1" onclick="tremorRateClicked()"/>
-        <label for="star1tremor" title="very low confidence">1 star</label>
-    </div>
-    <div class="vertical-center">
+<div class="first_row">
+    <div class="first_column">
         <label for="rangeTremor">Tremor</label>
         <input type="range" name="rangeTremor" min="0" max="100" onclick="tremorRangeClicked()">
     </div>
-</div>
-<div>
-    <div class="rate">
-        <input type="radio" id="star5bradykinesia" name="rateBradykinesia" value="5" onclick="bradykinesiaRateClicked()"/>
-        <label for="star5bradykinesia" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4bradykinesia" name="rateBradykinesia" value="4" onclick="bradykinesiaRateClicked()"/>
-        <label for="star4bradykinesia" title="high confidence">4 stars</label>
-        <input type="radio" id="star3bradykinesia" name="rateBradykinesia" value="3" onclick="bradykinesiaRateClicked()"/>
-        <label for="star3bradykinesia" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2bradykinesia" name="rateBradykinesia" value="2" onclick="bradykinesiaRateClicked()"/>
-        <label for="star2bradykinesia" title="low confidence">2 stars</label>
-        <input type="radio" id="star1bradykinesia" name="rateBradykinesia" value="1" onclick="bradykinesiaRateClicked()"/>
-        <label for="star1bradykinesia" title="very low confidence">1 star</label>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5tremor" name="rateTremor" value="5" onclick="tremorRateClicked()"/>
+            <label for="star5tremor" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4tremor" name="rateTremor" value="4" onclick="tremorRateClicked()"/>
+            <label for="star4tremor" title="high confidence">4 stars</label>
+            <input type="radio" id="star3tremor" name="rateTremor" value="3" onclick="tremorRateClicked()"/>
+            <label for="star3tremor" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2tremor" name="rateTremor" value="2" onclick="tremorRateClicked()"/>
+            <label for="star2tremor" title="low confidence">2 stars</label>
+            <input type="radio" id="star1tremor" name="rateTremor" value="1" onclick="tremorRateClicked()"/>
+            <label for="star1tremor" title="very low confidence">1 star</label>
+        </div>
     </div>
-    <div class="vertical-center">
+</div>
+<div class="row">
+    <div class="first_column">
         <label for="rangeBradykinesia">Bradykinesia</label>
         <input type="range" name="rangeBradykinesia" min="0" max="100" onclick="bradykinesiaRangeClicked()">
     </div>
-</div>
-<div>
-    <div class="rate">
-        <input type="radio" id="star5stability" name="rateStability" value="5" onclick="stabilityRateClicked()"/>
-        <label for="star5stability" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4stability" name="rateStability" value="4" onclick="stabilityRateClicked()"/>
-        <label for="star4stability" title="high confidence">4 stars</label>
-        <input type="radio" id="star3stability" name="rateStability" value="3" onclick="stabilityRateClicked()"/>
-        <label for="star3stability" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2stability" name="rateStability" value="2" onclick="stabilityRateClicked()"/>
-        <label for="star2stability" title="low confidence">2 stars</label>
-        <input type="radio" id="star1stability" name="rateStability" value="1" onclick="stabilityRateClicked()"/>
-        <label for="star1stability" title="very low confidence">1 star</label>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5bradykinesia" name="rateBradykinesia" value="5" onclick="bradykinesiaRateClicked()"/>
+            <label for="star5bradykinesia" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4bradykinesia" name="rateBradykinesia" value="4" onclick="bradykinesiaRateClicked()"/>
+            <label for="star4bradykinesia" title="high confidence">4 stars</label>
+            <input type="radio" id="star3bradykinesia" name="rateBradykinesia" value="3" onclick="bradykinesiaRateClicked()"/>
+            <label for="star3bradykinesia" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2bradykinesia" name="rateBradykinesia" value="2" onclick="bradykinesiaRateClicked()"/>
+            <label for="star2bradykinesia" title="low confidence">2 stars</label>
+            <input type="radio" id="star1bradykinesia" name="rateBradykinesia" value="1" onclick="bradykinesiaRateClicked()"/>
+            <label for="star1bradykinesia" title="very low confidence">1 star</label>
+        </div>
     </div>
-    <div class="vertical-center">
+</div>
+<div class="row">
+    <div class="first_column">
         <label for="rangeStability">Stability</label>
         <input type="range" name="rangeStability" min="0" max="100" onclick="stabilityRangeClicked()">
     </div>
-</div>
-<div>
-    <div class="rate">
-        <input type="radio" id="star5dynstability" name="rateDynStability" value="5" onclick="dynStabilityRateClicked()"/>
-        <label for="star5dynstability" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4dynstability" name="rateDynStability" value="4" onclick="dynStabilityRateClicked()"/>
-        <label for="star4dynstability" title="high confidence">4 stars</label>
-        <input type="radio" id="star3dynstability" name="rateDynStability" value="3" onclick="dynStabilityRateClicked()"/>
-        <label for="star3dynstability" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2dynstability" name="rateDynStability" value="2" onclick="dynStabilityRateClicked()"/>
-        <label for="star2dynstability" title="low confidence">2 stars</label>
-        <input type="radio" id="star1dynstability" name="rateDynStability" value="1" onclick="dynStabilityRateClicked()"/>
-        <label for="star1dynstability" title="very low confidence">1 star</label>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5stability" name="rateStability" value="5" onclick="stabilityRateClicked()"/>
+            <label for="star5stability" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4stability" name="rateStability" value="4" onclick="stabilityRateClicked()"/>
+            <label for="star4stability" title="high confidence">4 stars</label>
+            <input type="radio" id="star3stability" name="rateStability" value="3" onclick="stabilityRateClicked()"/>
+            <label for="star3stability" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2stability" name="rateStability" value="2" onclick="stabilityRateClicked()"/>
+            <label for="star2stability" title="low confidence">2 stars</label>
+            <input type="radio" id="star1stability" name="rateStability" value="1" onclick="stabilityRateClicked()"/>
+            <label for="star1stability" title="very low confidence">1 star</label>
+        </div>
     </div>
-    <div class="vertical-center">
+</div>
+<div class="row">
+    <div class="first_column">
         <label for="rangeDynStability">Dynamic Stability</label>
         <input type="range" name="rangeDynStability" min="0" max="100" onclick="dynStabilityRangeClicked()">
     </div>
-</div>
-<div>
-    <div class="rate">
-        <input type="radio" id="star5freezing" name="rateFreezing" value="5" onclick="freezingRateClicked()"/>
-        <label for="star5freezing" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4freezing" name="rateFreezing" value="4" onclick="freezingRateClicked()"/>
-        <label for="star4freezing" title="high confidence">4 stars</label>
-        <input type="radio" id="star3freezing" name="rateFreezing" value="3" onclick="freezingRateClicked()"/>
-        <label for="star3freezing" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2freezing" name="rateFreezing" value="2" onclick="freezingRateClicked()"/>
-        <label for="star2freezing" title="low confidence">2 stars</label>
-        <input type="radio" id="star1freezing" name="rateFreezing" value="1" onclick="freezingRateClicked()"/>
-        <label for="star1freezing" title="very low confidence">1 star</label>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5dynstability" name="rateDynStability" value="5" onclick="dynStabilityRateClicked()"/>
+            <label for="star5dynstability" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4dynstability" name="rateDynStability" value="4" onclick="dynStabilityRateClicked()"/>
+            <label for="star4dynstability" title="high confidence">4 stars</label>
+            <input type="radio" id="star3dynstability" name="rateDynStability" value="3" onclick="dynStabilityRateClicked()"/>
+            <label for="star3dynstability" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2dynstability" name="rateDynStability" value="2" onclick="dynStabilityRateClicked()"/>
+            <label for="star2dynstability" title="low confidence">2 stars</label>
+            <input type="radio" id="star1dynstability" name="rateDynStability" value="1" onclick="dynStabilityRateClicked()"/>
+            <label for="star1dynstability" title="very low confidence">1 star</label>
+        </div>
     </div>
-    <div class="vertical-center">
+</div>
+<div class="row">
+    <div class="first_column">
         <label for="rangeFreezing">Freezing</label>
         <input type="range" name="rangeFreezing" min="0" max="100" onclick="freezingRangeClicked()">
     </div>
-</div>
-<div>
-    <div class="rate">
-        <input type="radio" id="star5smoothness" name="rateSmoothness" value="5" onclick="smoothnessRateClicked()"/>
-        <label for="star5smoothness" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4smoothness" name="rateSmoothness" value="4" onclick="smoothnessRateClicked()"/>
-        <label for="star4smoothness" title="high confidence">4 stars</label>
-        <input type="radio" id="star3smoothness" name="rateSmoothness" value="3" onclick="smoothnessRateClicked()"/>
-        <label for="star3smoothness" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2smoothness" name="rateSmoothness" value="2" onclick="smoothnessRateClicked()"/>
-        <label for="star2smoothness" title="low confidence">2 stars</label>
-        <input type="radio" id="star1smoothness" name="rateSmoothness" value="1" onclick="smoothnessRateClicked()"/>
-        <label for="star1smoothness" title="very low confidence">1 star</label>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5freezing" name="rateFreezing" value="5" onclick="freezingRateClicked()"/>
+            <label for="star5freezing" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4freezing" name="rateFreezing" value="4" onclick="freezingRateClicked()"/>
+            <label for="star4freezing" title="high confidence">4 stars</label>
+            <input type="radio" id="star3freezing" name="rateFreezing" value="3" onclick="freezingRateClicked()"/>
+            <label for="star3freezing" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2freezing" name="rateFreezing" value="2" onclick="freezingRateClicked()"/>
+            <label for="star2freezing" title="low confidence">2 stars</label>
+            <input type="radio" id="star1freezing" name="rateFreezing" value="1" onclick="freezingRateClicked()"/>
+            <label for="star1freezing" title="very low confidence">1 star</label>
+        </div>
     </div>
-    <div class="vertical-center">
+</div>
+<div class="row">
+    <div class="first_column">
         <label for="rangeSmoothness">Smoothness</label>
         <input type="range" name="rangeSmoothness" min="0" max="100" onclick="smoothnessRangeClicked()">
     </div>
-</div>
-<div>
-    <div class="rate">
-        <input type="radio" id="star5symmetry" name="rateSymmetry" value="5" onclick="symmetryRateClicked()"/>
-        <label for="star5symmetry" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4symmetry" name="rateSymmetry" value="4" onclick="symmetryRateClicked()"/>
-        <label for="star4symmetry" title="high confidence">4 stars</label>
-        <input type="radio" id="star3symmetry" name="rateSymmetry" value="3" onclick="symmetryRateClicked()"/>
-        <label for="star3symmetry" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2symmetry" name="rateSymmetry" value="2" onclick="symmetryRateClicked()"/>
-        <label for="star2symmetry" title="low confidence">2 stars</label>
-        <input type="radio" id="star1symmetry" name="rateSymmetry" value="1" onclick="symmetryRateClicked()"/>
-        <label for="star1symmetry" title="very low confidence">1 star</label>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5smoothness" name="rateSmoothness" value="5" onclick="smoothnessRateClicked()"/>
+            <label for="star5smoothness" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4smoothness" name="rateSmoothness" value="4" onclick="smoothnessRateClicked()"/>
+            <label for="star4smoothness" title="high confidence">4 stars</label>
+            <input type="radio" id="star3smoothness" name="rateSmoothness" value="3" onclick="smoothnessRateClicked()"/>
+            <label for="star3smoothness" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2smoothness" name="rateSmoothness" value="2" onclick="smoothnessRateClicked()"/>
+            <label for="star2smoothness" title="low confidence">2 stars</label>
+            <input type="radio" id="star1smoothness" name="rateSmoothness" value="1" onclick="smoothnessRateClicked()"/>
+            <label for="star1smoothness" title="very low confidence">1 star</label>
+        </div>
     </div>
-    <div class="vertical-center">
+</div>
+<div class="limit_row">
+    <div class="first_column">
         <label for="rangeSymmetry">Symmetry</label>
         <input type="range" name="rangeSymmetry" min="0" max="100" onclick="symmetryRangeClicked()">
     </div>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5symmetry" name="rateSymmetry" value="5" onclick="symmetryRateClicked()"/>
+            <label for="star5symmetry" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4symmetry" name="rateSymmetry" value="4" onclick="symmetryRateClicked()"/>
+            <label for="star4symmetry" title="high confidence">4 stars</label>
+            <input type="radio" id="star3symmetry" name="rateSymmetry" value="3" onclick="symmetryRateClicked()"/>
+            <label for="star3symmetry" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2symmetry" name="rateSymmetry" value="2" onclick="symmetryRateClicked()"/>
+            <label for="star2symmetry" title="low confidence">2 stars</label>
+            <input type="radio" id="star1symmetry" name="rateSymmetry" value="1" onclick="symmetryRateClicked()"/>
+            <label for="star1symmetry" title="very low confidence">1 star</label>
+        </div>
+    </div>
 </div>
 {% else %}
-<div>
-    <div class="rate">
-        <input type="radio" id="star5general" name="rateGeneral" value="5" onclick="generalRateClicked()"/>
-        <label for="star5general" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4general" name="rateGeneral" value="4" onclick="generalRateClicked()"/>
-        <label for="star4general" title="high confidence">4 stars</label>
-        <input type="radio" id="star3general" name="rateGeneral" value="3" onclick="generalRateClicked()"/>
-        <label for="star3general" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2general" name="rateGeneral" value="2" onclick="generalRateClicked()"/>
-        <label for="star2general" title="low confidence">2 stars</label>
-        <input type="radio" id="star1general" name="rateGeneral" value="1" onclick="generalRateClicked()"/>
-        <label for="star1general" title="very low confidence">1 star</label>
-    </div>
-    <div class="vertical-center">
+<div class="limit_row">
+    <div class="first_column">
         <label for="rangeGeneral">GENERAL</label>
         <input type="range" name="rangeGeneral" min="0" max="100" onclick="generalRangeClicked()">
+    </div>
+    <div class="second_column">
+        <div class="rate">
+            <input type="radio" id="star5general" name="rateGeneral" value="5" onclick="generalRateClicked()"/>
+            <label for="star5general" title="very high confidence">5 stars</label>
+            <input type="radio" id="star4general" name="rateGeneral" value="4" onclick="generalRateClicked()"/>
+            <label for="star4general" title="high confidence">4 stars</label>
+            <input type="radio" id="star3general" name="rateGeneral" value="3" onclick="generalRateClicked()"/>
+            <label for="star3general" title="medium confidence">3 stars</label>
+            <input type="radio" id="star2general" name="rateGeneral" value="2" onclick="generalRateClicked()"/>
+            <label for="star2general" title="low confidence">2 stars</label>
+            <input type="radio" id="star1general" name="rateGeneral" value="1" onclick="generalRateClicked()"/>
+            <label for="star1general" title="very low confidence">1 star</label>
+        </div>
     </div>
 </div>
 {% endif %}
@@ -264,16 +347,21 @@ body, html {
 <div style="text-align:center">
    <iframe id="videoframe" src={{ videos.0 }} width="640" height="480" allow="autoplay"></iframe>
 </div>
-<div style="text-align:center">
-    <div>
+<div class="row">
+    <div class="col_3">
         <button type="button" style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="previousVideo()" id="leftButton" name="Previous">Previous Video</button>
     </div>
-    <div>
+    <div class="col_3">
         <button type="button" style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="nextVideo()" id="middleButton" name="Next">Next Video</button>
     </div>
-    <div>
+    <div class="col_3">
         <button type="button" style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="saveAndNext()" id="rightButton" name="SaveAndNext">Save and Next</button>
     </div>
+</div>
+<div>
+<p style="color:yellow;">
+You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
+</p>
 </div>
 </div>
 </div>
@@ -405,11 +493,6 @@ body, html {
                 return;
             }
         }
-        input_type = document.createElement("input");
-	input_type.setAttribute("name", "input_type");
-	input_type.setAttribute("value", document.general_or_symptoms);
-	input_type.setAttribute("type", "hidden");
-        document.evaluation.appendChild(input_type)
         time_spent = document.createElement("input");
 	time_spent.setAttribute("name", "time_spent");
 	time_spent.setAttribute("value", time_spent);

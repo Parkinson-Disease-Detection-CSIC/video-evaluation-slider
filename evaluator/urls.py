@@ -14,12 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, reverse
+from django.shortcuts import redirect
+
 from django.http import HttpResponse
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', lambda request: HttpResponse('the cow jumped over the moon')),
+    path('', lambda request: redirect('/polls/68/general/details')),
 ]
