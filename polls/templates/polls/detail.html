@@ -399,7 +399,8 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
         if (document.videosCount > document.currentVideo+1) {
             document.getElementById("leftButton").style.visibility = "visible";
             document.currentVideo=document.currentVideo+1;
-        idx = document.currentVideo;
+            idx = document.currentVideo;
+            document.getElementById("videoframe").src = "about:blank";
             document.getElementById("videoframe").src = document.videoArray[idx];
 
         }
@@ -411,7 +412,8 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
     function previousVideo() {
         if (document.currentVideo > 0) {
             document.currentVideo=document.currentVideo-1;
-        idx = document.currentVideo;
+            idx = document.currentVideo;
+            document.getElementById("videoframe").src = "about:blank";
             document.getElementById("videoframe").src = document.videoArray[idx];
             document.getElementById("middleButton").style.visibility = "visible";
         if (document.currentVideo == 0) {
