@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
   {% block title %}<title>Video Evaluation App</title>{% endblock %}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RDKGYP56H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2RDKGYP56H');
+  </script>
 </head>
 <body>
   {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
