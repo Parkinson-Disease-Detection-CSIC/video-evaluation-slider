@@ -50,7 +50,7 @@ body, html {
     .rate {
     }
     .rate:not(:checked) > input {
-	position: relative;
+    position: relative;
         top:-9999px; 
     }
     .rate:not(:checked) > label {
@@ -83,10 +83,10 @@ body, html {
     .vertical-center {
         text-align: right;
         margin: 0;
-	position: relative;
-	top: 50%;
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     }
 
     div {
@@ -105,155 +105,157 @@ body, html {
     }
 
 </style>
+<form name="evaluation" action="{% url 'polls:evaluate' sub_num %}" method="post">
+{% csrf_token %}
 <div class="container">
 <div class="toppane" style="padding: 10px">
-    <h1>Updating information for subject {{ sub_num }}.</h1><br>
+    <h1>Updating {{ type }} information for subject {{ sub_num }}.</h1><br>
 </div>
 <div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
 {% if type == "symptoms"  %}
 <div>
     <div class="rate">
-        <input type="radio" id="star5tremor" name="rateTremor" value="5" />
+        <input type="radio" id="star5tremor" name="rateTremor" value="5" onclick="tremorRateClicked()"/>
         <label for="star5tremor" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4tremor" name="rateTremor" value="4" />
+        <input type="radio" id="star4tremor" name="rateTremor" value="4" onclick="tremorRateClicked()"/>
         <label for="star4tremor" title="high confidence">4 stars</label>
-        <input type="radio" id="star3tremor" name="rateTremor" value="3" />
+        <input type="radio" id="star3tremor" name="rateTremor" value="3" onclick="tremorRateClicked()"/>
         <label for="star3tremor" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2tremor" name="rateTremor" value="2" />
+        <input type="radio" id="star2tremor" name="rateTremor" value="2" onclick="tremorRateClicked()"/>
         <label for="star2tremor" title="low confidence">2 stars</label>
-        <input type="radio" id="star1tremor" name="rateTremor" value="1" />
+        <input type="radio" id="star1tremor" name="rateTremor" value="1" onclick="tremorRateClicked()"/>
         <label for="star1tremor" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeTremor">Tremor</label>
-        <input type="range" name="rangTremor" min="0" max="100">
+        <input type="range" name="rangeTremor" min="0" max="100" onclick="tremorRangeClicked()">
     </div>
 </div>
 <div>
     <div class="rate">
-        <input type="radio" id="star5bradykinesia" name="rateBradykinesia" value="5" />
+        <input type="radio" id="star5bradykinesia" name="rateBradykinesia" value="5" onclick="bradykinesiaRateClicked()"/>
         <label for="star5bradykinesia" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4bradykinesia" name="rateBradykinesia" value="4" />
+        <input type="radio" id="star4bradykinesia" name="rateBradykinesia" value="4" onclick="bradykinesiaRateClicked()"/>
         <label for="star4bradykinesia" title="high confidence">4 stars</label>
-        <input type="radio" id="star3bradykinesia" name="rateBradykinesia" value="3" />
+        <input type="radio" id="star3bradykinesia" name="rateBradykinesia" value="3" onclick="bradykinesiaRateClicked()"/>
         <label for="star3bradykinesia" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2bradykinesia" name="rateBradykinesia" value="2" />
+        <input type="radio" id="star2bradykinesia" name="rateBradykinesia" value="2" onclick="bradykinesiaRateClicked()"/>
         <label for="star2bradykinesia" title="low confidence">2 stars</label>
-        <input type="radio" id="star1bradykinesia" name="rateBradykinesia" value="1" />
+        <input type="radio" id="star1bradykinesia" name="rateBradykinesia" value="1" onclick="bradykinesiaRateClicked()"/>
         <label for="star1bradykinesia" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeBradykinesia">Bradykinesia</label>
-        <input type="range" name="rangBradykinesia" min="0" max="100">
+        <input type="range" name="rangeBradykinesia" min="0" max="100" onclick="bradykinesiaRangeClicked()">
     </div>
 </div>
 <div>
     <div class="rate">
-        <input type="radio" id="star5stability" name="rateStability" value="5" />
+        <input type="radio" id="star5stability" name="rateStability" value="5" onclick="stabilityRateClicked()"/>
         <label for="star5stability" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4stability" name="rateStability" value="4" />
+        <input type="radio" id="star4stability" name="rateStability" value="4" onclick="stabilityRateClicked()"/>
         <label for="star4stability" title="high confidence">4 stars</label>
-        <input type="radio" id="star3stability" name="rateStability" value="3" />
+        <input type="radio" id="star3stability" name="rateStability" value="3" onclick="stabilityRateClicked()"/>
         <label for="star3stability" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2stability" name="rateStability" value="2" />
+        <input type="radio" id="star2stability" name="rateStability" value="2" onclick="stabilityRateClicked()"/>
         <label for="star2stability" title="low confidence">2 stars</label>
-        <input type="radio" id="star1stability" name="rateStability" value="1" />
+        <input type="radio" id="star1stability" name="rateStability" value="1" onclick="stabilityRateClicked()"/>
         <label for="star1stability" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeStability">Stability</label>
-        <input type="range" name="rangStability" min="0" max="100">
+        <input type="range" name="rangeStability" min="0" max="100" onclick="stabilityRangeClicked()">
     </div>
 </div>
 <div>
     <div class="rate">
-        <input type="radio" id="star5dynstability" name="rateDynStability" value="5" />
+        <input type="radio" id="star5dynstability" name="rateDynStability" value="5" onclick="dynStabilityRateClicked()"/>
         <label for="star5dynstability" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4dynstability" name="rateDynStability" value="4" />
+        <input type="radio" id="star4dynstability" name="rateDynStability" value="4" onclick="dynStabilityRateClicked()"/>
         <label for="star4dynstability" title="high confidence">4 stars</label>
-        <input type="radio" id="star3dynstability" name="rateDynStability" value="3" />
+        <input type="radio" id="star3dynstability" name="rateDynStability" value="3" onclick="dynStabilityRateClicked()"/>
         <label for="star3dynstability" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2dynstability" name="rateDynStability" value="2" />
+        <input type="radio" id="star2dynstability" name="rateDynStability" value="2" onclick="dynStabilityRateClicked()"/>
         <label for="star2dynstability" title="low confidence">2 stars</label>
-        <input type="radio" id="star1dynstability" name="rateDynStability" value="1" />
+        <input type="radio" id="star1dynstability" name="rateDynStability" value="1" onclick="dynStabilityRateClicked()"/>
         <label for="star1dynstability" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeDynStability">Dynamic Stability</label>
-        <input type="range" name="rangDynStability" min="0" max="100">
+        <input type="range" name="rangeDynStability" min="0" max="100" onclick="dynStabilityRangeClicked()">
     </div>
 </div>
 <div>
     <div class="rate">
-        <input type="radio" id="star5freezing" name="rateFreezing" value="5" />
+        <input type="radio" id="star5freezing" name="rateFreezing" value="5" onclick="freezingRateClicked()"/>
         <label for="star5freezing" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4freezing" name="rateFreezing" value="4" />
+        <input type="radio" id="star4freezing" name="rateFreezing" value="4" onclick="freezingRateClicked()"/>
         <label for="star4freezing" title="high confidence">4 stars</label>
-        <input type="radio" id="star3freezing" name="rateFreezing" value="3" />
+        <input type="radio" id="star3freezing" name="rateFreezing" value="3" onclick="freezingRateClicked()"/>
         <label for="star3freezing" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2freezing" name="rateFreezing" value="2" />
+        <input type="radio" id="star2freezing" name="rateFreezing" value="2" onclick="freezingRateClicked()"/>
         <label for="star2freezing" title="low confidence">2 stars</label>
-        <input type="radio" id="star1freezing" name="rateFreezing" value="1" />
+        <input type="radio" id="star1freezing" name="rateFreezing" value="1" onclick="freezingRateClicked()"/>
         <label for="star1freezing" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeFreezing">Freezing</label>
-        <input type="range" name="rangFreezing" min="0" max="100">
+        <input type="range" name="rangeFreezing" min="0" max="100" onclick="freezingRangeClicked()">
     </div>
 </div>
 <div>
     <div class="rate">
-        <input type="radio" id="star5smoothness" name="rateSmoothness" value="5" />
+        <input type="radio" id="star5smoothness" name="rateSmoothness" value="5" onclick="smoothnessRateClicked()"/>
         <label for="star5smoothness" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4smoothness" name="rateSmoothness" value="4" />
+        <input type="radio" id="star4smoothness" name="rateSmoothness" value="4" onclick="smoothnessRateClicked()"/>
         <label for="star4smoothness" title="high confidence">4 stars</label>
-        <input type="radio" id="star3smoothness" name="rateSmoothness" value="3" />
+        <input type="radio" id="star3smoothness" name="rateSmoothness" value="3" onclick="smoothnessRateClicked()"/>
         <label for="star3smoothness" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2smoothness" name="rateSmoothness" value="2" />
+        <input type="radio" id="star2smoothness" name="rateSmoothness" value="2" onclick="smoothnessRateClicked()"/>
         <label for="star2smoothness" title="low confidence">2 stars</label>
-        <input type="radio" id="star1smoothness" name="rateSmoothness" value="1" />
+        <input type="radio" id="star1smoothness" name="rateSmoothness" value="1" onclick="smoothnessRateClicked()"/>
         <label for="star1smoothness" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeSmoothness">Smoothness</label>
-        <input type="range" name="rangSmoothness" min="0" max="100">
+        <input type="range" name="rangeSmoothness" min="0" max="100" onclick="smoothnessRangeClicked()">
     </div>
 </div>
 <div>
     <div class="rate">
-        <input type="radio" id="star5symmetry" name="rateSymmetry" value="5" />
+        <input type="radio" id="star5symmetry" name="rateSymmetry" value="5" onclick="symmetryRateClicked()"/>
         <label for="star5symmetry" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4symmetry" name="rateSymmetry" value="4" />
+        <input type="radio" id="star4symmetry" name="rateSymmetry" value="4" onclick="symmetryRateClicked()"/>
         <label for="star4symmetry" title="high confidence">4 stars</label>
-        <input type="radio" id="star3symmetry" name="rateSymmetry" value="3" />
+        <input type="radio" id="star3symmetry" name="rateSymmetry" value="3" onclick="symmetryRateClicked()"/>
         <label for="star3symmetry" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2symmetry" name="rateSymmetry" value="2" />
+        <input type="radio" id="star2symmetry" name="rateSymmetry" value="2" onclick="symmetryRateClicked()"/>
         <label for="star2symmetry" title="low confidence">2 stars</label>
-        <input type="radio" id="star1symmetry" name="rateSymmetry" value="1" />
+        <input type="radio" id="star1symmetry" name="rateSymmetry" value="1" onclick="symmetryRateClicked()"/>
         <label for="star1symmetry" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeSymmetry">Symmetry</label>
-        <input type="range" name="rangSymmetry" min="0" max="100">
+        <input type="range" name="rangeSymmetry" min="0" max="100" onclick="symmetryRangeClicked()">
     </div>
 </div>
 {% else %}
 <div>
     <div class="rate">
-        <input type="radio" id="star5general" name="rateGeneral" value="5" />
+        <input type="radio" id="star5general" name="rateGeneral" value="5" onclick="generalRateClicked()"/>
         <label for="star5general" title="very high confidence">5 stars</label>
-        <input type="radio" id="star4general" name="rateGeneral" value="4" />
+        <input type="radio" id="star4general" name="rateGeneral" value="4" onclick="generalRateClicked()"/>
         <label for="star4general" title="high confidence">4 stars</label>
-        <input type="radio" id="star3general" name="rateGeneral" value="3" />
+        <input type="radio" id="star3general" name="rateGeneral" value="3" onclick="generalRateClicked()"/>
         <label for="star3general" title="medium confidence">3 stars</label>
-        <input type="radio" id="star2general" name="rateGeneral" value="2" />
+        <input type="radio" id="star2general" name="rateGeneral" value="2" onclick="generalRateClicked()"/>
         <label for="star2general" title="low confidence">2 stars</label>
-        <input type="radio" id="star1general" name="rateGeneral" value="1" />
+        <input type="radio" id="star1general" name="rateGeneral" value="1" onclick="generalRateClicked()"/>
         <label for="star1general" title="very low confidence">1 star</label>
     </div>
     <div class="vertical-center">
         <label for="rangeGeneral">GENERAL</label>
-        <input type="range" name="rangGeneral" min="0" max="100">
+        <input type="range" name="rangeGeneral" min="0" max="100" onclick="generalRangeClicked()">
     </div>
 </div>
 {% endif %}
@@ -270,27 +272,46 @@ body, html {
         <button type="button" style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="nextVideo()" id="middleButton" name="Next">Next Video</button>
     </div>
     <div>
-        <button style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="saveAndNext()" id="rightButton" name="SaveAndNext">Save and Next</button>
+        <button type="button" style="background-color:red; border-color:yellow; color:white; visibility:hidden" onclick="saveAndNext()" id="rightButton" name="SaveAndNext">Save and Next</button>
     </div>
 </div>
 </div>
 </div>
+</form>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.videosCount = {{ videos|length }};
-	document.videoArray = {{ videos|safe }};
+        document.videoArray = {{ videos|safe }};
+        document.general_or_symptoms = "{{ type }}";
+        document.evaluation_start = new Date();
         document.currentVideo=0;
+        document.generalRangeNotClicked = true;
+        document.generalStarsNotClicked = true;
+        document.tremorRangeNotClicked = true;
+        document.tremorStarsNotClicked = true;
+        document.bradykinesiaRangeNotClicked = true;
+        document.bradykinesiaStarsNotClicked = true;
+        document.stabilityRangeNotClicked = true;
+        document.stabilityStarsNotClicked = true;
+        document.dynStabilityRangeNotClicked = true;
+        document.dynStabilityStarsNotClicked = true;
+        document.freezingRangeNotClicked = true;
+        document.freezingStarsNotClicked = true;
+        document.smoothnessRangeNotClicked = true;
+        document.smoothnessStarsNotClicked = true;
+        document.symmetryRangeNotClicked = true;
+        document.symmetryStarsNotClicked = true;
         if (document.videosCount == 1) {
             document.getElementById("rightButton").style.visibility = "visible";
-	} else {
+        } else {
             document.getElementById("middleButton").style.visibility = "visible";
-	}
+        }
     }, false);
     function nextVideo() {
         if (document.videosCount > document.currentVideo+1) {
             document.getElementById("leftButton").style.visibility = "visible";
             document.currentVideo=document.currentVideo+1;
-	    idx = document.currentVideo;
+        idx = document.currentVideo;
             document.getElementById("videoframe").src = document.videoArray[idx];
 
         }
@@ -302,13 +323,147 @@ body, html {
     function previousVideo() {
         if (document.currentVideo > 0) {
             document.currentVideo=document.currentVideo-1;
-	    idx = document.currentVideo;
+        idx = document.currentVideo;
             document.getElementById("videoframe").src = document.videoArray[idx];
             document.getElementById("middleButton").style.visibility = "visible";
-	    if (document.currentVideo == 0) {
-	        document.getElementById("leftButton").style.visibility = "hidden";
-	    }
-	}
+        if (document.currentVideo == 0) {
+            document.getElementById("leftButton").style.visibility = "hidden";
+        }
+    }
+    }
+    function saveAndNext() {
+        var evaluation_end = new Date();
+        var time_spent = (evaluation_end - document.evaluation_start)/1000;
+        if (time_spent < 60) {
+            alert('Please spend at least one minute in the evaluation of this subject');
+            return;
+        }
+        if (!document.general_or_symptoms.localeCompare("general")) {
+            if (document.generalRangeNotClicked) {
+                alert('Please move the slider for the general status of this subject');
+                return;
+            }
+            if (document.generalStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the general status of this subject');
+                return;
+            }
+        } else {
+            if (document.tremorRangeNotClicked) {
+                alert('Please move the slider for the tremor status of this subject');
+                return;
+            }
+            if (document.tremorStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the tremor status of this subject');
+                return;
+            }
+            if (document.bradykinesiaRangeNotClicked) {
+                alert('Please move the slider for the bradykinesia status of this subject');
+                return;
+            }
+            if (document.bradykinesiaStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the bradykinesia status of this subject');
+                return;
+            }
+            if (document.stabilityRangeNotClicked) {
+                alert('Please move the slider for the stability status of this subject');
+                return;
+            }
+            if (document.stabilityStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the stability status of this subject');
+                return;
+            }
+            if (document.dynStabilityRangeNotClicked) {
+                alert('Please move the slider for the dynamic stability status of this subject');
+                return;
+            }
+            if (document.dynStabilityStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the dynamic stability status of this subject');
+                return;
+            }
+            if (document.freezingRangeNotClicked) {
+                alert('Please move the slider for the freezing status of this subject');
+                return;
+            }
+            if (document.freezingStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the freezing status of this subject');
+                return;
+            }
+            if (document.smoothnessRangeNotClicked) {
+                alert('Please move the slider for the smoothness status of this subject');
+                return;
+            }
+            if (document.smoothnessStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the smoothness status of this subject');
+                return;
+            }
+            if (document.symmetryRangeNotClicked) {
+                alert('Please move the slider for the symmetry status of this subject');
+                return;
+            }
+            if (document.symmetryStarsNotClicked) {
+                alert('Please rate your confidence (click stars) for evaluation the symmetry status of this subject');
+                return;
+            }
+        }
+        input_type = document.createElement("input");
+	input_type.setAttribute("name", "input_type");
+	input_type.setAttribute("value", document.general_or_symptoms);
+	input_type.setAttribute("type", "hidden");
+        document.evaluation.appendChild(input_type)
+        time_spent = document.createElement("input");
+	time_spent.setAttribute("name", "time_spent");
+	time_spent.setAttribute("value", time_spent);
+	time_spent.setAttribute("type", "hidden");
+        document.evaluation.appendChild(time_spent)
+        document.evaluation.submit();
+    }
+    function generalRangeClicked() {
+        document.generalRangeNotClicked = false;
+    }
+    function generalRateClicked() {
+        document.generalStarsNotClicked = false;
+    }
+    function tremorRangeClicked() {
+        document.tremorRangeNotClicked = false;
+    }
+    function tremorRateClicked() {
+        document.tremorStarsNotClicked = false;
+    }
+    function bradykinesiaRangeClicked() {
+        document.bradykinesiaRangeNotClicked = false;
+    }
+    function bradykinesiaRateClicked() {
+        document.bradykinesiaStarsNotClicked = false;
+    }
+    function stabilityRangeClicked() {
+        document.stabilityRangeNotClicked = false;
+    }
+    function stabilityRateClicked() {
+        document.stabilityStarsNotClicked = false;
+    }
+    function dynStabilityRangeClicked() {
+        document.dynStabilityRangeNotClicked = false;
+    }
+    function dynStabilityRateClicked() {
+        document.dynStabilityStarsNotClicked = false;
+    }
+    function freezingRangeClicked() {
+        document.freezingRangeNotClicked = false;
+    }
+    function freezingRateClicked() {
+        document.freezingStarsNotClicked = false;
+    }
+    function smoothnessRangeClicked() {
+        document.smoothnessRangeNotClicked = false;
+    }
+    function smoothnessRateClicked() {
+        document.smoothnessStarsNotClicked = false;
+    }
+    function symmetryRangeClicked() {
+        document.symmetryRangeNotClicked = false;
+    }
+    function symmetryRateClicked() {
+        document.symmetryStarsNotClicked = false;
     }
 </script>
 {% endblock %}

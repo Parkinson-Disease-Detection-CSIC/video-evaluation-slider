@@ -36,4 +36,20 @@ def detail(request, sub_num, type):
 
 @login_required
 def evaluate(request, sub_num):
-    return HttpResponse("You're evaluating subject %s." % sub_num)
+    if request.method == 'POST':
+        previous_type = request.POST.get("input_type")
+        if sub_num == 66:
+           new_sub_num = 68
+        else:
+           new_sub_num = 66
+        if previous_type == "general":
+           new_type = "symptoms"
+        else:
+           new_type = "general"
+        parameters = {
+            'evaluation': None,
+            'sub_num': new_sub_num,
+            'videos': list(video_urls[new_sub_num].values()),
+            'type': new_type
+        }
+        return render(request, 'polls/detail.html', parameters)
