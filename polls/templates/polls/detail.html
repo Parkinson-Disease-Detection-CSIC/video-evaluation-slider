@@ -16,6 +16,7 @@ body, html {
 .container {
   width: 100%;
   height: 100%;
+  padding: 10px;
 }
 
 .leftpane {
@@ -30,9 +31,9 @@ body, html {
   height: 80%;
   position: relative;
   float: right;
+  padding-top: 5px;
   background-color: #d6e8ff;
   border-collapse: collapse;
-  padding: 25px;
 }
 
 .toppane {
@@ -83,6 +84,7 @@ body, html {
         content: "";
         display: table;
         clear: both;
+	text-align: center;
     }
 
     .col_3 {
@@ -90,6 +92,7 @@ body, html {
         margin: 0;
         float: left;
 	width: 33%;
+	text-align: center;
     }
 
     .rate {
@@ -394,7 +397,7 @@ body, html {
         <button type="button" onclick="saveAndNext()" id="rightButton" name="SaveAndNext" disabled>Save and Next</button>
     </div>
 </div>
-<div style="padding:5px; margin:0;">
+<div style="padding:5px; margin:0; text-align:center;">
 <p>
 You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
 </p>
