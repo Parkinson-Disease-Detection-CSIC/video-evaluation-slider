@@ -12,6 +12,10 @@ def index(request):
     return redirect('/polls/68/general/details')
 
 @login_required
+def backwards_redirect(request, sub_num):
+    return redirect('/polls/68/general/details')
+
+@login_required
 def details(request, sub_num, input_type):
     user = authenticate()
     try:
