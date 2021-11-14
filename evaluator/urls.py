@@ -16,12 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, reverse
 from django.shortcuts import redirect
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.http import HttpResponse
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    path(
+        "favicon.ico",
+        RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),
+    ),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', lambda request: redirect('/polls/68/general/details')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
