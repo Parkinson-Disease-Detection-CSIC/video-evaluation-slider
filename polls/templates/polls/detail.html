@@ -19,20 +19,20 @@ body, html {
 }
 
 .leftpane {
-    width: 45%;
+    width: 48%;
     height: 80%;
     float: left;
-    background-color: rosybrown;
+    background-color: #cfafaf;
 }
 
 .rightpane {
-  width: 45%;
+  width: 48%;
   height: 80%;
   position: relative;
   float: right;
   background-color: #d6e8ff;
   border-collapse: collapse;
-  padding: 20px;
+  padding: 25px;
 }
 
 .toppane {
@@ -44,7 +44,7 @@ body, html {
 
     * {
         font-family: "Rubik", "sans-serif";
-        font-size: 24pt;
+        font-size: 24px;
 	margin: 0;
 	padding: 0;
     }
@@ -79,12 +79,15 @@ body, html {
 
     .row:after {
         padding: 0;
+        margin: 0;
         content: "";
         display: table;
         clear: both;
     }
 
     .col_3 {
+        padding: 0;
+        margin: 0;
         float: left;
 	width: 33%;
     }
@@ -150,6 +153,27 @@ body, html {
         width:300px;
     }
 
+    button {
+        border: 1px solid yellow;
+        background-color: #ffbf00;
+        color: black;
+        padding: 5px 10px;
+    }
+
+    button:hover {
+        border: 1px solid #0099cc;
+        background-color: #00aacc;
+        color: #ffffff;
+        padding: 5px 10px;
+    }
+
+    button:disabled,
+    button[disabled]{
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+    }
+
 </style>
 <form name="evaluation" action="{% url 'polls:evaluate' sub_num type %}" method="post">
 {% csrf_token %}
@@ -160,29 +184,41 @@ body, html {
     <p style="text-align:left; padding:0;">
     Thank you for evaluating the symptoms of this subject!
     </p>
-    <ul type="circle" style="text-align:left; padding:20px; margin:20px;">
-    <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required). Videos may be enlarged in a different window by clicking on the icon on the top right corner.</li>
-    <li>Please move the slider of each of the symptoms evaluating the severity of each of them (to the left for subjects presenting weaker symptoms, that is subjects in a better condition, and to the right for subjects with stronger symptoms, that is subjects in a worse condition).</li>
+    <ul type="circle" style="text-align:left; padding:20px; margin:0;">
+    <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required).</li>
+    <li>Please move the slider of each of the symptoms evaluating the severity of each of them. To the left for worse condition, and to the right for a better one.</li>
     <li>Please rate your confidence in evaluating each of the symptoms with the 5 stars next to each slider.</li>
     <li>And finally, please click on "Save and Next" button to save your evaluation and go to the next subject.</li>
     </ul>
+    <p style="text-align:left; padding:0;">
+    Videos may be enlarged in a different window by clicking on the icon on the top right corner.
+    </p>
+    <p style="text-align:left; padding:0;">
+    Videos may take a few seconds to load.
+    </p>
 {% else %}
     <p style="text-align:left; padding:10px;">
     Thank you for evaluating the general condition of this subject!
     </p>
-    <ul type="circle" style="text-align:left; padding:20px; margin:20px;">
-    <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required). Videos may be enlarged in a different window by clicking on the icon on the top right corner.</li>
+    <ul type="circle" style="text-align:left; padding:20px; margin:0;">
+    <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required).</li>
     <li>Please move the slider to evaluate the severity of Parkinson for this subject (to the left for subjects in a better condition, and to the right for subjects in a worse condition).</li>
     <li>Please rate your confidence in evaluating this subject with the 5 stars the slider.</li>
     <li>And finally, please click on "Save and Next" button to save your evaluation and go to the next subject.</li>
     </ul>
+    <p style="text-align:left; padding:0;">
+    Videos may be enlarged in a different window by clicking on the icon on the top right corner.
+    </p>
+    <p style="text-align:left; padding:0;">
+    Videos may take a few seconds to load.
+    </p>
 {% endif %}
 </div>
 <div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
 {% if type == "symptoms"  %}
 <div class="first_row">
     <div class="first_column">
-        <label for="rangeTremor">Tremor</label>
+        <label style="font-size:1vw;" for="rangeTremor">Tremor</label>
         <input type="range" name="rangeTremor" min="0" max="100" onclick="tremorRangeClicked()">
     </div>
     <div class="second_column">
@@ -202,7 +238,7 @@ body, html {
 </div>
 <div class="row">
     <div class="first_column">
-        <label for="rangeBradykinesia">Bradykinesia</label>
+        <label style="font-size:1vw;" for="rangeBradykinesia">Bradykinesia</label>
         <input type="range" name="rangeBradykinesia" min="0" max="100" onclick="bradykinesiaRangeClicked()">
     </div>
     <div class="second_column">
@@ -222,7 +258,7 @@ body, html {
 </div>
 <div class="row">
     <div class="first_column">
-        <label for="rangeStability">Stability</label>
+        <label style="font-size:1vw;" for="rangeStability">Stability</label>
         <input type="range" name="rangeStability" min="0" max="100" onclick="stabilityRangeClicked()">
     </div>
     <div class="second_column">
@@ -242,7 +278,7 @@ body, html {
 </div>
 <div class="row">
     <div class="first_column">
-        <label for="rangeDynStability">Dynamic Stability</label>
+        <label style="font-size:1vw;" for="rangeDynStability">Dynamic Stability</label>
         <input type="range" name="rangeDynStability" min="0" max="100" onclick="dynStabilityRangeClicked()">
     </div>
     <div class="second_column">
@@ -262,7 +298,7 @@ body, html {
 </div>
 <div class="row">
     <div class="first_column">
-        <label for="rangeFreezing">Freezing</label>
+        <label style="font-size:1vw;" for="rangeFreezing">Freezing</label>
         <input type="range" name="rangeFreezing" min="0" max="100" onclick="freezingRangeClicked()">
     </div>
     <div class="second_column">
@@ -282,7 +318,7 @@ body, html {
 </div>
 <div class="row">
     <div class="first_column">
-        <label for="rangeSmoothness">Smoothness</label>
+        <label style="font-size:1vw;" for="rangeSmoothness">Smoothness</label>
         <input type="range" name="rangeSmoothness" min="0" max="100" onclick="smoothnessRangeClicked()">
     </div>
     <div class="second_column">
@@ -302,7 +338,7 @@ body, html {
 </div>
 <div class="limit_row">
     <div class="first_column">
-        <label for="rangeSymmetry">Symmetry</label>
+        <label style="font-size:1vw;" for="rangeSymmetry">Symmetry</label>
         <input type="range" name="rangeSymmetry" min="0" max="100" onclick="symmetryRangeClicked()">
     </div>
     <div class="second_column">
@@ -323,7 +359,7 @@ body, html {
 {% else %}
 <div class="limit_row">
     <div class="first_column">
-        <label for="rangeGeneral">GENERAL</label>
+        <label style="font-size:1vw;" for="rangeGeneral">GENERAL</label>
         <input type="range" name="rangeGeneral" min="0" max="100" onclick="generalRangeClicked()">
     </div>
     <div class="second_column">
@@ -344,21 +380,21 @@ body, html {
 {% endif %}
 </div>
 <div class="rightpane">
-<div style="text-align:center">
-   <iframe id="videoframe" src={{ videos.0 }} width="640" height="480" allow="autoplay"></iframe>
+<div style="text-align:center; padding:0; margin:0;">
+   <iframe id="videoframe" style="padding:0; margin:0;" src={{ videos.0 }} width="640" height="480" allow="autoplay"></iframe>
 </div>
 <div class="row">
     <div class="col_3">
-        <button type="button" style="background-color:#eeac65; border-color:yellow; color:black; padding:3px; visibility:hidden" onclick="previousVideo()" id="leftButton" name="Previous">&lt;&lt; Previous Video</button>
+        <button type="button" onclick="previousVideo()" id="leftButton" name="Previous" disabled>&lt;&lt; Previous Video</button>
     </div>
     <div class="col_3">
-        <button type="button" style="background-color:#eeac65; border-color:yellow; color:black; padding:3px; visibility:hidden" onclick="nextVideo()" id="middleButton" name="Next">Next Video &gt;&gt;</button>
+        <button type="button" onclick="nextVideo()" id="middleButton" name="Next" disabled>Next Video &gt;&gt;</button>
     </div>
     <div class="col_3">
-        <button type="button" style="background-color:#eeac65; border-color:yellow; color:black; padding:3px; visibility:hidden" onclick="saveAndNext()" id="rightButton" name="SaveAndNext">Save and Next</button>
+        <button type="button" onclick="saveAndNext()" id="rightButton" name="SaveAndNext" disabled>Save and Next</button>
     </div>
 </div>
-<div>
+<div style="padding:5px; margin:0;">
 <p>
 You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
 </p>
@@ -390,14 +426,14 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
         document.symmetryRangeNotClicked = true;
         document.symmetryStarsNotClicked = true;
         if (document.videosCount == 1) {
-            document.getElementById("rightButton").style.visibility = "visible";
+            document.getElementById("rightButton").disabled = false;
         } else {
-            document.getElementById("middleButton").style.visibility = "visible";
+            document.getElementById("middleButton").disabled = false;
         }
     }, false);
     function nextVideo() {
         if (document.videosCount > document.currentVideo+1) {
-            document.getElementById("leftButton").style.visibility = "visible";
+            document.getElementById("leftButton").disabled = false;
             document.currentVideo=document.currentVideo+1;
             idx = document.currentVideo;
             document.getElementById("videoframe").src = "about:blank";
@@ -405,8 +441,8 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
 
         }
         if (document.currentVideo == document.videosCount - 1) {
-            document.getElementById("middleButton").style.visibility = "hidden";
-            document.getElementById("rightButton").style.visibility = "visible";
+            document.getElementById("middleButton").disabled = true;
+            document.getElementById("rightButton").disabled = false;
         }
     }
     function previousVideo() {
@@ -415,9 +451,9 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
             idx = document.currentVideo;
             document.getElementById("videoframe").src = "about:blank";
             document.getElementById("videoframe").src = document.videoArray[idx];
-            document.getElementById("middleButton").style.visibility = "visible";
+            document.getElementById("middleButton").disabled = false;
         if (document.currentVideo == 0) {
-            document.getElementById("leftButton").style.visibility = "hidden";
+            document.getElementById("leftButton").disabled = true;
         }
     }
     }
