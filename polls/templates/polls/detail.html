@@ -224,6 +224,15 @@ body, html {
 {% endif %}
 </div>
 <div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
+<div style="text-align:center; padding:5px; margin:0;">
+    <div class="first_column">
+    <p style = "font-size:0.8vw;">&lt;- healthier patient | more affected -&gt;</p>
+    </div>
+    <div class="second_column">
+    <p style = "font-size:0.6vw;">Use stars to rate how confident</p>
+    <p style = "font-size:0.6vw;">you are with the evaluation</p>
+    </div>
+</div>
 {% if type == "symptoms"  %}
 <div class="first_row">
     <div class="first_column">
@@ -469,8 +478,8 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
     function saveAndNext() {
         var evaluation_end = new Date();
         var time_spent = (evaluation_end - document.evaluation_start)/1000;
-        if (time_spent < 60) {
-            alert('Please spend at least one minute in the evaluation of this subject');
+        if (time_spent < 1) {
+            alert('Please spend at least one second in the evaluation of this subject');
             return;
         }
         if (!document.general_or_symptoms.localeCompare("general")) {
