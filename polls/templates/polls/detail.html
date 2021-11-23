@@ -226,11 +226,22 @@ body, html {
 <div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
 <div style="text-align:center; padding:5px; margin:0;">
     <div class="first_column">
-    <p style = "font-size:0.8vw;">&lt;- healthier patient | more affected -&gt;</p>
+    <div style="float:left; text-align:right; width:45%">
+    <img src="/static/arrow_left.png">
+    </div>
+    <div style="float:left; text-align:left; width:25%">
+    <p style = "font-size:0.8vw;">healthier subject</p>
+    </div>
+    <div style="float:left; text-align:right; width:25%">
+    <p style = "font-size:0.8vw;">more affected</p>
+    </div>
+    <div style="float:left; text-align:left; width:5%">
+    <img src="/static/arrow_right.png">
+    </div>
     </div>
     <div class="second_column">
-    <p style = "font-size:0.6vw;">Use stars to rate how confident</p>
-    <p style = "font-size:0.6vw;">you are with the evaluation</p>
+    <p style = "font-size:0.8vw;">Use stars to rate how confident</p>
+    <p style = "font-size:0.8vw;">you are with the evaluation</p>
     </div>
 </div>
 {% if type == "symptoms"  %}
