@@ -1,11 +1,10 @@
 
 video_urls = {
-  66: {
-    "upngo": "https://drive.google.com/file/d/1IjIbu4RudcF420GR33wAsbpCOa3S01Rm/preview",
-    "meters15": "https://drive.google.com/file/d/1ZPUL9w0GEpagwLPPZ7oUYGC14xgrYOKU/preview",
+  39: {
+    "all": "https://drive.google.com/file/d/1cV40Ufac3H8yQ6dEOxf2tjL7O9CyYCJC/preview",
+    "meters15": "https://drive.google.com/file/d/1YNyKrfF0-BeXWxGSlrVqIyGxh96x5sR9/preview",
   },
-  68: {
-    "upngo": "https://drive.google.com/file/d/1EOht8tM--TF1ej2OJB9ulxmH_jfeGU3b/preview",
-    "meters15": "https://drive.google.com/file/d/1F13UvFAzCa1xnawjAanoZyVNUyMpNs5a/preview",
+  41: {
+    "meters15": "https://drive.google.com/file/d/1sHM167RTxsQ1ifUb-NX1qiKlJ48ct41z/preview",
   },
 }

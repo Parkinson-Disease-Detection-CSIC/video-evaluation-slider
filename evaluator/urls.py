@@ -30,5 +30,5 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', lambda request: redirect('/polls/68/general/details')),
+    path('', lambda request: redirect('/polls/39/general/details')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

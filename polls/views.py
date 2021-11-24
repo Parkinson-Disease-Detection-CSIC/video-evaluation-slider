@@ -9,11 +9,11 @@ import random
 
 @login_required
 def index(request):
-    return redirect('/polls/68/general/details')
+    return redirect('/polls/39/general/details')
 
 @login_required
 def backwards_redirect(request, sub_num):
-    return redirect('/polls/68/general/details')
+    return redirect('/polls/39/general/details')
 
 @login_required
 def details(request, sub_num, input_type):
@@ -36,13 +36,13 @@ def details(request, sub_num, input_type):
 def evaluate(request, sub_num, input_type):
     user = authenticate()
     if request.method == 'POST':
-        if sub_num == 66:
-           new_sub_num = 68
+        if sub_num == 41:
+           new_sub_num = 39
         else:
-           new_sub_num = 66
+           new_sub_num = 41
         if input_type == "general":
            new_type = "symptoms"
         else:
            new_type = "general"
         return redirect(f"/polls/{new_sub_num}/{new_type}/details")
-    return redirect('/polls/68/general/details')
+    return redirect('/polls/39/general/details')
