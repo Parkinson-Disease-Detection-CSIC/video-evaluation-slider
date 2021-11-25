@@ -1,8 +1,9 @@
 from .models import Evaluation
+from datetime import datetime
 
 def get_list_remaining_evaluations(user, all_evaluations):
     q = Evaluation.objects.filter(
-        user=user
+        evaluator=user
     )
     evaluations_done = list(q)
     evaluated_general_list = [
@@ -41,19 +42,19 @@ def update_symptoms_evaluation(user, subject, symptoms, time_spent):
         subject = subject,
         time_spent_symptoms = time_spent,
         done_symptoms = True,
-        tremor = symptoms['tremor'].value,
-        tremor_confidence = symptoms['tremor'].confidence,
-        bradykinesia = symptoms['bradykinesia'].value,
-        bradykinesia_confidence = symptoms['bradykinesia'].confidence,
-        stability = symptoms['stability'].value,
-        stability_confidence = symptoms['stability'].confidence,
-        dyn_stability = symptoms['dyn_stability'].value,
-        dyn_stability_confidence = symptoms['dyn_stability'].confidence,
-        freezing = symptoms['freezing'].value,
-        freezing_confidence = symptoms['freezing'].confidence,
-        smoothness = symptoms['smoothness'].value,
-        smoothness_confidence = symptoms['smoothness'].confidence,
-        symmetry = symptoms['symmetry'].value,
-        symmetry_confidence = symptoms['symmetry'].confidence,
+        tremor = symptoms['rangeTremor'],
+        tremor_confidence = symptoms['rateTremor'],
+        bradykinesia = symptoms['rangeBradykinesia'],
+        bradykinesia_confidence = symptoms['rateBradykinesia'],
+        stability = symptoms['rangeStability'],
+        stability_confidence = symptoms['rateStability'],
+        dyn_stability = symptoms['rangeDynStability'],
+        dyn_stability_confidence = symptoms['rateDynStability'],
+        freezing = symptoms['rangeFreezing'],
+        freezing_confidence = symptoms['rateFreezing'],
+        smoothness = symptoms['rangeSmoothness'],
+        smoothness_confidence = symptoms['rateSmoothness'],
+        symmetry = symptoms['rangeSymmetry'],
+        symmetry_confidence = symptoms['rateSymmetry'],
     )
     return eval.save()

@@ -560,11 +560,11 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
                 return;
             }
         }
-        time_spent = document.createElement("input");
-	time_spent.setAttribute("name", "time_spent");
-	time_spent.setAttribute("value", time_spent);
-	time_spent.setAttribute("type", "hidden");
-        document.evaluation.appendChild(time_spent)
+        time_spent_input = document.createElement("input");
+        time_spent_input.setAttribute("name", "time_spent");
+        time_spent_input.setAttribute("value", time_spent);
+        time_spent_input.setAttribute("type", "hidden");
+        document.evaluation.appendChild(time_spent_input)
         document.evaluation.submit();
     }
     function generalRangeClicked() {
