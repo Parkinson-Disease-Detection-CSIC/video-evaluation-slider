@@ -1,5 +1,5 @@
 from .models import Evaluation
-from datetime import datetime
+from django.utils import timezone
 
 def get_list_remaining_evaluations(user, all_evaluations):
     q = Evaluation.objects.filter(
@@ -24,7 +24,7 @@ def get_list_remaining_evaluations(user, all_evaluations):
     ]
 
 def update_eval_general(eval, general, confidence, time_spent):
-    eval.general_date = datetime.now()
+    eval.general_date = timezone.now()
     eval.time_spent_general = time_spent
     eval.done_general = True
     eval.general = general
@@ -47,7 +47,7 @@ def update_general_evaluation(user, subject, general, confidence, time_spent):
 
 def update_eval_symptoms(eval, symptoms, time_spent):
     eval.time_spent_symptoms = time_spent
-    eval.symptoms_date = datetime.now()
+    eval.symptoms_date = timezone.now()
     eval.done_symptoms = True
     eval.tremor = symptoms['rangeTremor']
     eval.tremor_confidence = symptoms['rateTremor']
