@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.http import HttpResponse
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
+from polls.views import redirect_random
 
 urlpatterns = [
     path(
@@ -30,5 +31,5 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', lambda request: redirect('/polls/39/general/details')),
+    path('', lambda request: redirect_random(request)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
