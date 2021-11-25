@@ -19,42 +19,60 @@ def get_list_remaining_evaluations(user, all_evaluations):
     evaluated_list = evaluated_general_list + evaluated_symptoms_list
     return [
         (subject, type)
-	for (subject, type) in all_evaluations
-	if (subject, type) not in evaluated_list
+        for (subject, type) in all_evaluations
+        if (subject, type) not in evaluated_list
     ]
 
+def update_eval_general(eval, general, confidence, time_spent):
+    eval.general_date = datetime.now()
+    eval.time_spent_general = time_spent
+    eval.done_general = True
+    eval.general = general
+    eval.general_confidence = confidence
+    return eval
+
 def update_general_evaluation(user, subject, general, confidence, time_spent):
-    eval = Evaluation(
+    eval = Evaluation.objects.get(
         evaluator = user,
-        general_date = datetime.now(),
-        subject = subject,
-        time_spent_general = time_spent,
-        done_general = True,
-        general = general,
-        general_confidence = confidence,
+        subject = subject
     )
+    if eval is None:
+        eval = Evaluation(
+            evaluator = user,
+            subject = subject
+        )
+    eval = update_eval_general(eval, general, confidence, time_spent)
     return eval.save()
 
+def update_eval_symptoms(eval, symptoms, time_spent):
+    eval.time_spent_symptoms = time_spent
+    eval.symptoms_date = datetime.now()
+    eval.done_symptoms = True
+    eval.tremor = symptoms['rangeTremor']
+    eval.tremor_confidence = symptoms['rateTremor']
+    eval.bradykinesia = symptoms['rangeBradykinesia']
+    eval.bradykinesia_confidence = symptoms['rateBradykinesia']
+    eval.stability = symptoms['rangeStability']
+    eval.stability_confidence = symptoms['rateStability']
+    eval.dyn_stability = symptoms['rangeDynStability']
+    eval.dyn_stability_confidence = symptoms['rateDynStability']
+    eval.freezing = symptoms['rangeFreezing']
+    eval.freezing_confidence = symptoms['rateFreezing']
+    eval.smoothness = symptoms['rangeSmoothness']
+    eval.smoothness_confidence = symptoms['rateSmoothness']
+    eval.symmetry = symptoms['rangeSymmetry']
+    eval.symmetry_confidence = symptoms['rateSymmetry']
+    return eval
+
 def update_symptoms_evaluation(user, subject, symptoms, time_spent):
-    eval = Evaluation(
+    eval = Evaluation.objects.get(
         evaluator = user,
-        symptoms_date = datetime.now(),
-        subject = subject,
-        time_spent_symptoms = time_spent,
-        done_symptoms = True,
-        tremor = symptoms['rangeTremor'],
-        tremor_confidence = symptoms['rateTremor'],
-        bradykinesia = symptoms['rangeBradykinesia'],
-        bradykinesia_confidence = symptoms['rateBradykinesia'],
-        stability = symptoms['rangeStability'],
-        stability_confidence = symptoms['rateStability'],
-        dyn_stability = symptoms['rangeDynStability'],
-        dyn_stability_confidence = symptoms['rateDynStability'],
-        freezing = symptoms['rangeFreezing'],
-        freezing_confidence = symptoms['rateFreezing'],
-        smoothness = symptoms['rangeSmoothness'],
-        smoothness_confidence = symptoms['rateSmoothness'],
-        symmetry = symptoms['rangeSymmetry'],
-        symmetry_confidence = symptoms['rateSymmetry'],
+        subject = subject
     )
+    if eval is None:
+        eval = Evaluation(
+            evaluator = user,
+            subject = subject
+        )
+    eval = update_eval_symptoms(eval, symptoms, time_spent)
     return eval.save()

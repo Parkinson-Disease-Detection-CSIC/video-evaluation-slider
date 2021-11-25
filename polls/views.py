@@ -12,7 +12,7 @@ import random
 
 @login_required
 def index(request):
-    return redirect_random(request.user)
+    return redirect_random(request)
 
 def get_all_evaluations():
     return [
@@ -20,16 +20,19 @@ def get_all_evaluations():
         for subject in video_urls for type in ['general', 'symptoms']
     ]
 
-def redirect_random(user):
+def redirect_random(request):
     all_evaluations = get_all_evaluations()
-    remaining_evaluations = get_list_remaining_evaluations(user, all_evaluations)
-    random_index = random.randrange(len(remaining_evaluations))
-    random_evaluation = remaining_evaluations[random_index]
-    return redirect(f"/polls/{random_evaluation[0]}/{random_evaluation[1]}/details")
+    remaining_evaluations = get_list_remaining_evaluations(request.user, all_evaluations)
+    if len(remaining_evaluations) > 0:
+        random_index = random.randrange(len(remaining_evaluations))
+        random_evaluation = remaining_evaluations[random_index]
+        return redirect(f"/polls/{random_evaluation[0]}/{random_evaluation[1]}/details")
+    else:
+        return render(request, 'polls/congratulations.html', {})
 
 @login_required
 def backwards_redirect(request, sub_num):
-    return redirect_random(request.user)
+    return redirect_random(request)
 
 @login_required
 def details(request, sub_num, input_type):
@@ -70,4 +73,4 @@ def evaluate(request, sub_num, input_type):
             symptoms,
             int(float(request.POST.get('time_spent')))
         )
-    return redirect_random(request.user)
+    return redirect_random(request)
