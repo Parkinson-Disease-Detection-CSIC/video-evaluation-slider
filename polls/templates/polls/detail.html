@@ -430,6 +430,22 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
 </div>
 </div>
 </div>
+<input id="rangeGeneralClicked" style="display:none;" type="text" value="0">
+<input id="rateGeneralClicked" style="display:none;" type="text" value="0">
+<input id="rangeTremorClicked" style="display:none;" type="text" value="0">
+<input id="rateTremorClicked" style="display:none;" type="text" value="0">
+<input id="rangeBradykinesiaClicked" style="display:none;" type="text" value="0">
+<input id="rateBradykinesiaClicked" style="display:none;" type="text" value="0">
+<input id="rangeStabilityClicked" style="display:none;" type="text" value="0">
+<input id="rateStabilityClicked" style="display:none;" type="text" value="0">
+<input id="rangeDynStabilityClicked" style="display:none;" type="text" value="0">
+<input id="rateDynStabilityClicked" style="display:none;" type="text" value="0">
+<input id="rangeFreezingClicked" style="display:none;" type="text" value="0">
+<input id="rateFreezingClicked" style="display:none;" type="text" value="0">
+<input id="rangeSmoothnessClicked" style="display:none;" type="text" value="0">
+<input id="rateSmoothnessClicked" style="display:none;" type="text" value="0">
+<input id="rangeSymmetryClicked" style="display:none;" type="text" value="0">
+<input id="rateSymmetryClicked" style="display:none;" type="text" value="0">
 </form>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -438,22 +454,6 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
         document.general_or_symptoms = "{{ type }}";
         document.evaluation_start = new Date();
         document.currentVideo=0;
-        document.generalRangeNotClicked = true;
-        document.generalStarsNotClicked = true;
-        document.tremorRangeNotClicked = true;
-        document.tremorStarsNotClicked = true;
-        document.bradykinesiaRangeNotClicked = true;
-        document.bradykinesiaStarsNotClicked = true;
-        document.stabilityRangeNotClicked = true;
-        document.stabilityStarsNotClicked = true;
-        document.dynStabilityRangeNotClicked = true;
-        document.dynStabilityStarsNotClicked = true;
-        document.freezingRangeNotClicked = true;
-        document.freezingStarsNotClicked = true;
-        document.smoothnessRangeNotClicked = true;
-        document.smoothnessStarsNotClicked = true;
-        document.symmetryRangeNotClicked = true;
-        document.symmetryStarsNotClicked = true;
         if (document.videosCount == 1) {
             document.getElementById("rightButton").disabled = false;
         } else {
@@ -494,68 +494,68 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
             return;
         }
         if (!document.general_or_symptoms.localeCompare("general")) {
-            if (document.generalRangeNotClicked) {
+            if (document.getElementById("rangeGeneralClicked").value != "1") {
                 alert('Please move the slider for the general status of this subject');
                 return;
             }
-            if (document.generalStarsNotClicked) {
+            if (document.getElementById("rateGeneralClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the general status of this subject');
                 return;
             }
         } else {
-            if (document.tremorRangeNotClicked) {
+            if (document.getElementById("rangeTremorClicked").value != "1") {
                 alert('Please move the slider for the tremor status of this subject');
                 return;
             }
-            if (document.tremorStarsNotClicked) {
+            if (document.getElementById("rateTremorClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the tremor status of this subject');
                 return;
             }
-            if (document.bradykinesiaRangeNotClicked) {
+            if (document.getElementById("rangeBradykinesiaClicked").value != "1") {
                 alert('Please move the slider for the bradykinesia status of this subject');
                 return;
             }
-            if (document.bradykinesiaStarsNotClicked) {
+            if (document.getElementById("rateBradykinesiaClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the bradykinesia status of this subject');
                 return;
             }
-            if (document.stabilityRangeNotClicked) {
+            if (document.getElementById("rangeStabilityClicked").value != "1") {
                 alert('Please move the slider for the stability status of this subject');
                 return;
             }
-            if (document.stabilityStarsNotClicked) {
+            if (document.getElementById("rateStabilityClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the stability status of this subject');
                 return;
             }
-            if (document.dynStabilityRangeNotClicked) {
+            if (document.getElementById("rangeDynStabilityClicked").value != "1") {
                 alert('Please move the slider for the dynamic stability status of this subject');
                 return;
             }
-            if (document.dynStabilityStarsNotClicked) {
+            if (document.getElementById("rateSynStabilityClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the dynamic stability status of this subject');
                 return;
             }
-            if (document.freezingRangeNotClicked) {
+            if (document.getElementById("rangeFreezingClicked").value != "1") {
                 alert('Please move the slider for the freezing status of this subject');
                 return;
             }
-            if (document.freezingStarsNotClicked) {
+            if (document.getElementById("rateFreezingClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the freezing status of this subject');
                 return;
             }
-            if (document.smoothnessRangeNotClicked) {
+            if (document.getElementById("rangeSmoothnessClicked").value != "1") {
                 alert('Please move the slider for the smoothness status of this subject');
                 return;
             }
-            if (document.smoothnessStarsNotClicked) {
+            if (document.getElementById("rateSmoothnessClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the smoothness status of this subject');
                 return;
             }
-            if (document.symmetryRangeNotClicked) {
+            if (document.getElementById("rangeSymmetryClicked").value != "1") {
                 alert('Please move the slider for the symmetry status of this subject');
                 return;
             }
-            if (document.symmetryStarsNotClicked) {
+            if (document.getElementById("rateSymmetryClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the symmetry status of this subject');
                 return;
             }
@@ -568,52 +568,52 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
         document.evaluation.submit();
     }
     function generalRangeClicked() {
-        document.generalRangeNotClicked = false;
+        document.getElementById("rangeGeneralClicked").value = "1";
     }
     function generalRateClicked() {
-        document.generalStarsNotClicked = false;
+        document.getElementById("rateGeneralClicked").value = "1";
     }
     function tremorRangeClicked() {
-        document.tremorRangeNotClicked = false;
+        document.getElementById("rangeTremorClicked").value = "1";
     }
     function tremorRateClicked() {
-        document.tremorStarsNotClicked = false;
+        document.getElementById("rateTremorClicked").value = "1";
     }
     function bradykinesiaRangeClicked() {
-        document.bradykinesiaRangeNotClicked = false;
+        document.getElementById("rangeBradykinesiaClicked").value = "1";
     }
     function bradykinesiaRateClicked() {
-        document.bradykinesiaStarsNotClicked = false;
+        document.getElementById("rateBradykinesiaClicked").value = "1";
     }
     function stabilityRangeClicked() {
-        document.stabilityRangeNotClicked = false;
+        document.getElementById("rangeStabilityClicked").value = "1";
     }
     function stabilityRateClicked() {
-        document.stabilityStarsNotClicked = false;
+        document.getElementById("rateStabilityClicked").value = "1";
     }
     function dynStabilityRangeClicked() {
-        document.dynStabilityRangeNotClicked = false;
+        document.getElementById("rangeDynStabilityClicked").value = "1";
     }
     function dynStabilityRateClicked() {
-        document.dynStabilityStarsNotClicked = false;
+        document.getElementById("rateDynStabilityClicked").value = "1";
     }
     function freezingRangeClicked() {
-        document.freezingRangeNotClicked = false;
+        document.getElementById("rangeFreezingClicked").value = "1";
     }
     function freezingRateClicked() {
-        document.freezingStarsNotClicked = false;
+        document.getElementById("rateFreezingClicked").value = "1";
     }
     function smoothnessRangeClicked() {
-        document.smoothnessRangeNotClicked = false;
+        document.getElementById("rangeSmoothnessClicked").value = "1";
     }
     function smoothnessRateClicked() {
-        document.smoothnessStarsNotClicked = false;
+        document.getElementById("rateSmoothnessClicked").value = "1";
     }
     function symmetryRangeClicked() {
-        document.symmetryRangeNotClicked = false;
+        document.getElementById("rangeSymmetryClicked").value = "1";
     }
     function symmetryRateClicked() {
-        document.symmetryStarsNotClicked = false;
+        document.getElementById("rateSymmetryClicked").value = "1";
     }
 </script>
 {% endblock %}
