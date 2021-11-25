@@ -32,11 +32,12 @@ def update_eval_general(eval, general, confidence, time_spent):
     return eval
 
 def update_general_evaluation(user, subject, general, confidence, time_spent):
-    eval = Evaluation.objects.get(
-        evaluator = user,
-        subject = subject
-    )
-    if eval is None:
+    try:
+        eval = Evaluation.objects.get(
+            evaluator = user,
+            subject = subject
+        )
+    except Evaluation.DoesNotExist:
         eval = Evaluation(
             evaluator = user,
             subject = subject
@@ -65,11 +66,12 @@ def update_eval_symptoms(eval, symptoms, time_spent):
     return eval
 
 def update_symptoms_evaluation(user, subject, symptoms, time_spent):
-    eval = Evaluation.objects.get(
-        evaluator = user,
-        subject = subject
-    )
-    if eval is None:
+    try:
+        eval = Evaluation.objects.get(
+            evaluator = user,
+            subject = subject
+        )
+    except Evaluation.DoesNotExist:
         eval = Evaluation(
             evaluator = user,
             subject = subject
