@@ -194,17 +194,9 @@ body, html {
     Thank you for evaluating the symptoms of this subject!
     </p>
     <ul type="circle" style="text-align:left; padding-left:1vw; margin-left:1vw; margin-bottom:1vh;">
-    <li style="text-align:left; margin:0;">Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required).</li>
+    <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required).</li>
     <li>Please move the slider of each of the symptoms evaluating the severity of each of them. To the left for worse condition, and to the right for a better one.</li>
     <li>Please rate your confidence in evaluating each of the symptoms with the 5 stars next to each slider.</li>
-    <li>And finally, please click on "Save and Next" button to save your evaluation and go to the next subject.</li>
-    </ul>
-    <p style="text-align:left; padding-left:1vw; margin-bottom:1vh;">
-    Videos may be enlarged in a different window by clicking on the icon on the top right corner.
-    </p>
-    <p style="text-align:left; padding-left:1vw; margin-bottom:1vh;">
-    Videos may take a few seconds to load.
-    </p>
 {% else %}
     <p style="text-align:left; padding-left:1vw; margin-bottom:1vh;">
     Thank you for evaluating the general condition of this subject!
@@ -213,6 +205,7 @@ body, html {
     <li>Please go through all the videos in the right panel by clicking "Next Video" (and going back with "Previous Video if required).</li>
     <li>Please move the slider to evaluate the severity of Parkinson for this subject (to the left for subjects in a better condition, and to the right for subjects in a worse condition).</li>
     <li>Please rate your confidence in evaluating this subject with the 5 stars the slider.</li>
+{% endif %}
     <li>And finally, please click on "Save and Next" button to save your evaluation and go to the next subject.</li>
     </ul>
     <p style="text-align:left; padding-left:1vw; margin-bottom:1vh;">
@@ -221,7 +214,6 @@ body, html {
     <p style="text-align:left; padding-left:1vw; margin-bottom:1vh;">
     Videos may take a few seconds to load.
     </p>
-{% endif %}
 </div>
 <div class="leftpane" style="padding-right: 20px; padding-bottom: 20px">
 <div style="text-align:center; padding:5px; margin:0;">
@@ -446,13 +438,17 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
 <input id="rateSmoothnessClicked" style="display:none;" type="text" value="0">
 <input id="rangeSymmetryClicked" style="display:none;" type="text" value="0">
 <input id="rateSymmetryClicked" style="display:none;" type="text" value="0">
+<input id="evaluationStart" style="display:none;" type="text" value="0">
 </form>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.videosCount = {{ videos|length }};
         document.videoArray = {{ videos|safe }};
         document.general_or_symptoms = "{{ type }}";
-        document.evaluation_start = new Date();
+        if (document.getElementById("evaluationStart").value == "0") {
+            var evaluation_start = new Date();
+            document.getElementById("evaluationStart").value = evaluation_start.getTime();
+        }
         document.currentVideo=0;
         if (document.videosCount == 1) {
             document.getElementById("rightButton").disabled = false;
@@ -488,7 +484,8 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
     }
     function saveAndNext() {
         var evaluation_end = new Date();
-        var time_spent = (evaluation_end - document.evaluation_start)/1000;
+        var evaluation_start = parseInt(document.getElementById("evaluationStart").value);
+        var time_spent = (evaluation_end.getTime() - evaluation_start)/1000;
         if (time_spent < 1) {
             alert('Please spend at least one second in the evaluation of this subject');
             return;
@@ -531,7 +528,7 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
                 alert('Please move the slider for the dynamic stability status of this subject');
                 return;
             }
-            if (document.getElementById("rateSynStabilityClicked").value != "1") {
+            if (document.getElementById("rateDynStabilityClicked").value != "1") {
                 alert('Please rate your confidence (click stars) for evaluation the dynamic stability status of this subject');
                 return;
             }
