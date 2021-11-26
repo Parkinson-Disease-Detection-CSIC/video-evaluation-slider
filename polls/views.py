@@ -4,7 +4,7 @@ from django.urls import reverse
 from .models import Evaluation
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from .videos import video_urls
+from .videos import get_video_urls
 from .queries import get_list_remaining_evaluations
 from .queries import update_symptoms_evaluation
 from .queries import update_general_evaluation
@@ -17,7 +17,7 @@ def index(request):
 def get_all_evaluations():
     return [
         (subject, type)
-        for subject in video_urls for type in ['general', 'symptoms']
+        for subject in get_video_urls() for type in ['general', 'symptoms']
     ]
 
 def redirect_random(request):
@@ -47,7 +47,7 @@ def details(request, sub_num, input_type):
         'evaluations_done': len(all_evaluations) - len(remaining_evaluations),
         'total_evaluations': len(all_evaluations),
 	'sub_num': sub_num,
-	'videos': list(video_urls[sub_num].values()),
+	'videos': list(get_video_urls()[sub_num].values()),
 	'type': input_type
     }
     return render(request, 'polls/detail.html', parameters)
