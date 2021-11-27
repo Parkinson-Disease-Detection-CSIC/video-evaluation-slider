@@ -28,6 +28,7 @@ def redirect_random(request):
     else:
         return render(request, 'polls/congratulations.html', {})
 
+@login_required
 def index(request):
     response = HttpResponse(
         content_type='text/csv',
