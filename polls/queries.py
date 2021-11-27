@@ -1,6 +1,12 @@
 from .models import Evaluation
 from django.utils import timezone
 
+def get_all_data():
+    q = Evaluation.objects.filter(
+        evaluator__in=['german','diego','nacho']
+    )
+    return list(q)
+
 def get_list_remaining_evaluations(user, all_evaluations):
     q = Evaluation.objects.filter(
         evaluator=user

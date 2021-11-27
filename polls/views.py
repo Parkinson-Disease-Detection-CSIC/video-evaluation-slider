@@ -8,11 +8,8 @@ from .videos import get_video_urls
 from .queries import get_list_remaining_evaluations
 from .queries import update_symptoms_evaluation
 from .queries import update_general_evaluation
+import csv
 import random
-
-@login_required
-def index(request):
-    return redirect_random(request)
 
 def get_all_evaluations():
     return [
@@ -29,6 +26,65 @@ def redirect_random(request):
         return redirect(f"/polls/{random_evaluation[0]}/{random_evaluation[1]}/details")
     else:
         return render(request, 'polls/congratulations.html', {})
+
+def index(request):
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename="evaluations.csv"'},
+    )
+
+    writer = csv.writer(response)
+    writer.writerow([
+        'evaluator',
+        'subject',
+        'general',
+        'tremor',
+        'bradykinesia',
+        'stability',
+        'dyn_stability',
+        'freezing',
+        'smoothness',
+        'symmetry',
+        'general_date',
+        'symptoms_date',
+        'time_spent_general',
+        'time_spent_symptoms',
+        'general_confidence',
+        'tremor_confidence',
+        'bradykinesia_confidence',
+        'stability_confidence',
+        'dyn_stability_confidence',
+        'freezing_confidence',
+        'smoothness_confidence',
+        'symmetry_confidence'
+    ])
+    for eval in get_all_data():
+        row = [
+           eval.evaluator,
+           eval.subject,
+           eval.general,
+           eval.tremor,
+           eval.bradykinesia,
+           eval.stability,
+           eval.dyn_stability,
+           eval.freezing,
+           eval.smoothness,
+           eval.symmetry,
+           eval.general_date,
+           eval.symptoms_date,
+           eval.time_spent_general,
+           eval.time_spent_symptoms,
+           eval.general_confidence,
+           eval.tremor_confidence,
+           eval.bradykinesia_confidence,
+           eval.stability_confidence,
+           eval.dyn_stability_confidence,
+           eval.freezing_confidence,
+           eval.smoothness_confidence,
+           eval.symmetry_confidence
+        ]
+        writer.writerow(row)
+    return response
 
 @login_required
 def backwards_redirect(request, sub_num):
