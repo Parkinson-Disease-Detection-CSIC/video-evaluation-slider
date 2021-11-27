@@ -8,6 +8,7 @@ from .videos import get_video_urls
 from .queries import get_list_remaining_evaluations
 from .queries import update_symptoms_evaluation
 from .queries import update_general_evaluation
+from .queries import get_all_data
 import csv
 import random
 
