@@ -562,7 +562,9 @@ You have made {{ evaluations_done }} evaluations out of {{ total_evaluations }}.
         time_spent_input.setAttribute("value", time_spent);
         time_spent_input.setAttribute("type", "hidden");
         document.evaluation.appendChild(time_spent_input)
-        document.evaluation.submit();
+        if (confirm("Are you sure that you want to submit this evaluation and go to next subject?")) {
+            document.evaluation.submit();
+        }
     }
     function generalRangeClicked() {
         document.getElementById("rangeGeneralClicked").value = "1";
