@@ -30,6 +30,13 @@ def redirect_random(request):
 
 @login_required
 def index(request):
+    evaluators = request.GET.get('evaluators')
+    if evaluators is None:
+        return redirect_random(request)
+    else:
+        return make_report(evaluators.split(","))
+
+def make_report(evaluators):
     response = HttpResponse(
         content_type='text/csv',
         headers={'Content-Disposition': 'attachment; filename="evaluations.csv"'},
@@ -60,7 +67,7 @@ def index(request):
         'smoothness_confidence',
         'symmetry_confidence'
     ])
-    for eval in get_all_data():
+    for eval in get_all_data(evaluators):
         row = [
            eval.evaluator,
            eval.subject,

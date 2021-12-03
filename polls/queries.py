@@ -1,9 +1,9 @@
 from .models import Evaluation
 from django.utils import timezone
 
-def get_all_data():
+def get_all_data(evaluators):
     q = Evaluation.objects.filter(
-        evaluator__in=['german','diego','nacho']
+        evaluator__in=evaluators
     )
     return list(q)
 
